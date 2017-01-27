@@ -13,10 +13,10 @@
     "type": "git",
     "url": "git+https://github.com/towering-cranes/towering-cranes.git"
   },
-
   "dependencies": {
     "angular": "^1.6.1",
     "angular-materialize": "^0.2.2",
+    "angular-route": "^1.6.1",
     "body-parser": "^1.16.0",
     "express": "^4.14.0",
     "mysql": "^2.13.0",
