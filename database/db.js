@@ -5,13 +5,13 @@ var Sequelize = require('sequelize');
 var db = new Sequelize('gamemon', 'root', '');
 
 var User = db.define('User', {
-  username: {type: Sequelize.STRING},
+  username: {type: Sequelize.STRING, unique: true},
   password: Sequelize.STRING
 });
 
 var Game = db.define('Game', {
   giantBombId: Sequelize.INTEGER,
-  title: {type: Sequelize.STRING},
+  title: {type: Sequelize.STRING, unique: true},
   aliases: Sequelize.STRING,
   image: Sequelize.STRING,
   releaseDate: Sequelize.DATE,
@@ -24,15 +24,15 @@ var Game = db.define('Game', {
 
 
 var Franchise = db.define('Franchise', {
-  franchise: {type: Sequelize.STRING}
+  franchise: {type: Sequelize.STRING, unique: true}
 });
 
 var Platform = db.define('Platform', {
-  platform: {type: Sequelize.STRING}
+  platform: {type: Sequelize.STRING, unique: true}
 });
 
 var Genre = db.define('Genre', {
-  genre: {type: Sequelize.STRING}
+  genre: {type: Sequelize.STRING, unique: true}
 });
 
 var GameLibrary = db.define('GameLibrary', {});

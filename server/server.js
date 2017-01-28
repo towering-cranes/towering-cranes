@@ -31,7 +31,7 @@ app.post('/games', function(req, res) {
       }
     }).then(function(user) {
       var game = gameObj.results;
-      var newGame = db.Game.build({
+      var newGame = {
         giantBombId: game.id,
         title: game.name,
         aliases: game.aliases, // string
@@ -42,8 +42,8 @@ app.post('/games', function(req, res) {
         summary: game.deck,
         similarGames: JSON.stringify(game.similar_games[0]), // array of objects
         videos: JSON.stringify(game.videos[0].api_detail_url) // array of objects
-      });
-      newGame.save().then(function(game) {
+      };
+      db.Game.findOrCreate({where: newGame}).spread(function(game, created) {
         user.addGame(game);
         game.addUser(user);
         res.send(game);
