@@ -8,26 +8,27 @@ app.use(bodyParser.json());
 var port = process.env.PORT || 8080;
 
 app.post('/users', function(req, res) {
-  var newUser = req.body;
-  var makeUser = function(username, password) {
-    var user = db.User.build({
-      username: username,
-      password: password
-    });
-    user.save().then(function(user) {
+  var requestObj = req.body;
+  var newUser = {
+    username: requestObj.username,
+    password: requestObj.password
+  };
+  db.User.findOrCreate({where: newUser}).spread(function(user, created) {
+    if (created) {
       console.log('user created: ', user);
-      res.send(user);
-    });
-  }
-  makeUser(newUser.username, newUser.password);
+      res.send('***User created!***');
+    } else {
+      res.send('User already exists!!!')
+    }
+  });
 });
 
 app.post('/games', function(req, res) {
   var newGame = req.body;
-  var addGame = function(gameObj, username) {
+  var addGame = function(gameObj) {
     db.User.findOne({
       where: {
-        username: username
+        username: gameObj.username
       }
     }).then(function(user) {
       var game = gameObj.results;
@@ -37,20 +38,23 @@ app.post('/games', function(req, res) {
         aliases: game.aliases, // string
         image: game.image.super_url,
         releaseDate: game.original_release_date,
-        publishers: JSON.stringify(game.publishers[0]), // array of objects
-        developers: JSON.stringify(game.developers[0]), // array of objects
+        publishers: JSON.stringify(game.publishers), // array of objects
+        developers: JSON.stringify(game.developers), // array of objects
         summary: game.deck,
-        similarGames: JSON.stringify(game.similar_games[0]), // array of objects
-        videos: JSON.stringify(game.videos[0].api_detail_url) // array of objects
+        similarGames: JSON.stringify(game.similar_games), // array of objects
+        videos: JSON.stringify(game.videos.api_detail_url) // array of objects
       };
       db.Game.findOrCreate({where: newGame}).spread(function(game, created) {
-        user.addGame(game);
-        game.addUser(user);
-        res.send(game);
+          user.addGame(game); // only needs one direction
+        if (created) {
+          res.send('***ADDED TO DB***');
+        } else {
+          res.send('ALREADY IN DB');
+        }
       });
-    })
+    });
   };
-  addGame(newGame, 'test');
+  addGame(newGame);
 });
 
 var server = app.listen(port, function() {
