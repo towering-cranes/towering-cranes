@@ -35,9 +35,27 @@ var Genre = db.define('Genre', {
   genre: {type: Sequelize.STRING, unique: true}
 });
 
-var GameLibrary = db.define('GameLibrary', {});
-var GamePlatform = db.define('GamePlatform', {});;
-var GameGenre = db.define('GameGenre', {});;
+var GameLibrary = db.define('GameLibrary', {
+  id: {
+    type: Sequelize.INTEGER,
+    autoIncrement: true,
+    primaryKey: true
+  }
+});
+var GamePlatform = db.define('GamePlatform', {
+  id: {
+    type: Sequelize.INTEGER,
+    autoIncrement: true,
+    primaryKey: true
+  }
+});
+var GameGenre = db.define('GameGenre', {
+  id: {
+    type: Sequelize.INTEGER,
+    autoIncrement: true,
+    primaryKey: true
+  }
+});
 
 //creating a GameLibrary join table to holding users and games
 User.belongsToMany(Game, {through: 'GameLibrary'});
