@@ -1,7 +1,18 @@
-angular.module('gamemon', ['ngRoute'])
+angular.module('gamemon', [
+  'gameMon.gameCollection',
+  'gameMon.search',
+  'ngRoute'
+  ])
 .config(function($routeProvider) {
   $routeProvider
   .when('/', {
-    templateUrl: 'index.html'
-  });
+    templateUrl: 'home.html'
+  })
+  .when('/signin', {
+    templateUrl: 'signin.html'
+  })
+  .when('/signup', {
+    templateUrl: 'signup.html'
+  })
+  .otherwise({redirectTo: '/'});
 });
