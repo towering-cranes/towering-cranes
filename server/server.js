@@ -40,11 +40,26 @@ app.post('/games', function(req, res) {
   });
 });
 
+app.get('/users/games/:username', function(req, res) {
+  var user = req.params.username;
+
+  dbHelpers.getGamesFromCollection(user, function(games) {
+    res.send(games);
+  })
+});
+
 // Remove game from user's collection
 app.delete('/games', function(req, res) {
-  var game = req.body.results;
+  var gameTitle = req.body.results.name;
   var user = req.body.username;
   // Delete game from database
+  dbHelpers.removeGameFromCollection(user, gameTitle, function(destroyed) {
+    if (destroyed) {
+      res.send('Game was removed from collection');
+    } else {
+      res.send('No game was removed from the collection');
+    }
+  });
 });
 
 // Filter by game's genre

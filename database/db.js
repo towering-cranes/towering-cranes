@@ -75,7 +75,7 @@ Platform.belongsToMany(Game, {through: 'GamePlatform'});
 Game.belongsToMany(Genre, {through: 'GameGenre'});
 Genre.belongsToMany(Game, {through: 'GameGenre'});
 
-//creates tables in mysql if they don't exist
+// creates tables in mysql if they don't exist
 // User.sync();
 // Game.sync();
 // Franchise.sync();
@@ -87,7 +87,7 @@ Genre.belongsToMany(Game, {through: 'GameGenre'});
 db.sync(); // Sequelize decides what order to avoid errors
 
 //export them for use
-
+exports.sequelize = db;
 exports.User = User;
 exports.Game = Game;
 exports.Franchise = Franchise;

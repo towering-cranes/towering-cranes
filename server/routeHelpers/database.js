@@ -30,3 +30,36 @@ exports.addGameToCollection = function(user, game, callback) {
     });
   });
 };
+
+exports.getGamesFromCollection = function(user, callback) {
+  db.sequelize.query(`SELECT users.username,games.* FROM users INNER JOIN gamelibraries ON UserId=users.id INNER JOIN games ON GameId=games.id WHERE users.username="${user}";`).spread(function(games) {
+    callback(games);
+  });
+};
+
+exports.removeGameFromCollection = function(user, game, callback) {
+  // Find user id
+  //
+  // Find game id
+  //
+  // Delete user/game's row in GameLibraries
+  db.User.findOne({where: {username: user}}).then(function(user) {
+    if (user) {
+      var userId = user.id;
+
+      db.Game.findOne({where: { title: game }}).then(function(game) {
+        if (game) {
+          var gameId = game.id;
+
+          db.GameLibrary.destroy({where: { UserId: userId, GameId: gameId }}).then(function(destroyed) {
+            callback(destroyed);
+          });
+        } else {
+          callback(game);
+        }
+      })
+    } else { // handle case that user doesn't exist
+      callback(user);
+    }
+  });
+};
