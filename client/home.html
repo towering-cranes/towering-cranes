@@ -6,6 +6,7 @@
     <div class="nav-content">
       <h3>Game Collection</h3>
     </div>
+    <!--Nav bar-->
     <div class="nav-wrapper">
       <ul class="left hide-on-med-and-down">
         <li>
@@ -42,19 +43,45 @@
         <li><a href="javascript:void(0);">Link 4</a></li>
         <li><a href="javascript:void(0);">Link 5</a></li>
     </ul>
-
-
+    <!--Add to collection button-->
     <div class="nav-content">
-      <a class="btn-floating btn-large halfway-fab waves-effect waves-light teal">
-        <i class="material-icons">add</i>
+      <a href="#" class="btn-floating btn-large halfway-fab waves-effect waves-light teal button-collapse show-on-large" data-activates="search-nav" data-sidenav="right" data-menuwidth="400" data-closeonclick="false">
+          <i class="material-icons">add</i>
       </a>
     </div>
   </nav>
+  <div ng-controller="SearchController">
+    <ul id="search-nav" class="side-nav">
+      <div class="searchContainer">
+        <li><h4>Search Games</h4></li>
+        <li><input type="text" name="search" placeholder="search"></input></li>
+        <li><h5>Search Results</h5></li>
+        <div ng-repeat="game in search.results">
+          <li>
+          <div class="card horizontal">
+            <div class="card-image">
+              <img src="http://lorempixel.com/100/190/nature/6">
+            </div>
+            <div class="card-stacked">
+              <div class="card-content">
+                <p>{{ game.deck }}</p>
+              </div>
+              <div class="card-action">
+                <a href="#">More Details</a>
+              </div>
+            </div>
+          </div>
+          </li>
+        </div>
+      </div>
+    </ul>
+  </div>
+
     <!-- Games view -->
     <div class="row">
       <div class="game" ng-repeat="game in data.games">
         <!-- game -->
-        <div class="col s3">
+        <div class="col s2">
           <!-- img, description etc UPDATE to include final property of data object-->
           <a class="gameImage" data-target="game0" modal>
           <img class='champion-icon' src='http://ddragon.leagueoflegends.com/cdn/7.2.1/img/champion/Trundle.png'/>
@@ -65,37 +92,8 @@
     </div>
   </div>
 </div>
-<br>
-<!-- Search Area -->
-<!-- Needs a controller to handle GET requests -->
-<div class="row">
-  <div class="col s8">
-  <!-- Placeholder -->
-  </div>
-  <div class="col s4">
-    <div ng-controller="SearchController">
-      Search Area
-      <input type="text" name="search" placeholder="search"></input>
-        Search Results
-      <div ng-repeat="game in search.results">
-        <div class="card horizontal">
-          <div class="card-image">
-            <img src="http://lorempixel.com/100/190/nature/6">
-          </div>
-          <div class="card-stacked">
-            <div class="card-content">
-              <p>{{ game.deck }}</p>
-            </div>
-            <div class="card-action">
-              <a href="#">More Details</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<br>
+
+
 <!--Game Modal Window Area -->
 <!-- Needs a controller to GET data from db/API and display add/remove from collection button-->
 <!-- Modal window -->
