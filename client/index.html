@@ -1,12 +1,54 @@
 <!DOCTYPE html>
 <html ng-app = "gamemon">
 <head>
-  <title></title>
+  <meta charset="utf-8"/>
+  <title>GameMon</title>
+  <!-- Favicon here -->
+<!--   <link rel="shortcut icon" type="image/x-icon" href="assets/favicon.ico"> -->
+  <!-- Stylesheet-->
+  <link rel="stylesheet" type="text/css" href="styles/styles.css" />
+  <!--Import Google Icon Font-->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!--Import materialize.css-->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css">
 </head>
 <body>
-Hello World!
-<script src = "https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
+<!-- Navigation Bar -->
+<!-- Needs a controller to handle signing in/out/up-->
+  <nav>
+    <div class="nav-wrapper">
+      <a href="#" class="brand-logo">GameMon</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a href="#!">Sign In/Sign Out/Sign Up</a></li>
+      </ul>
+    </div>
+  </nav>
+
+<!-- Game Collection -->
+<!-- Needs a controller for custom filtering -->
+Game Collection
+<br>
+<!-- Search Area -->
+<!-- Needs a controller to handle GET requests -->
+Search Area
+<br>
+<!--Game Modal Window Area -->
+<!-- Needs a controller to GET data from db/API and display add/remove from collection button-->
+Modal Window
+
+
+<div ng-view></div>
+<!--JQuery-->
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<!--Angular -->
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+<!-- <script src = "https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script> -->
+<!--Materialize-->
+<script type="text/javascript" src="styles/materialize.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-materialize/0.2.2/angular-materialize.min.js"></script>
+<!--Angular-route-->
 <script src = "https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular-route.min.js"></script>
+<!--Scripts in files-->
 <script src = "app.js"></script>
 </body>
 </html>
