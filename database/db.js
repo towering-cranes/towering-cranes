@@ -35,9 +35,27 @@ var Genre = db.define('Genre', {
   genre: {type: Sequelize.STRING, unique: true}
 });
 
-var GameLibrary = db.define('GameLibrary', {});
-var GamePlatform = db.define('GamePlatform', {});;
-var GameGenre = db.define('GameGenre', {});;
+var GameLibrary = db.define('GameLibrary', {
+  id: {
+    type: Sequelize.INTEGER,
+    autoIncrement: true,
+    primaryKey: true
+  }
+});
+var GamePlatform = db.define('GamePlatform', {
+  id: {
+    type: Sequelize.INTEGER,
+    autoIncrement: true,
+    primaryKey: true
+  }
+});
+var GameGenre = db.define('GameGenre', {
+  id: {
+    type: Sequelize.INTEGER,
+    autoIncrement: true,
+    primaryKey: true
+  }
+});
 
 //creating a GameLibrary join table to holding users and games
 User.belongsToMany(Game, {through: 'GameLibrary'});
@@ -57,7 +75,7 @@ Platform.belongsToMany(Game, {through: 'GamePlatform'});
 Game.belongsToMany(Genre, {through: 'GameGenre'});
 Genre.belongsToMany(Game, {through: 'GameGenre'});
 
-//creates tables in mysql if they don't exist
+// creates tables in mysql if they don't exist
 // User.sync();
 // Game.sync();
 // Franchise.sync();
@@ -69,7 +87,7 @@ Genre.belongsToMany(Game, {through: 'GameGenre'});
 db.sync(); // Sequelize decides what order to avoid errors
 
 //export them for use
-
+exports.sequelize = db;
 exports.User = User;
 exports.Game = Game;
 exports.Franchise = Franchise;
