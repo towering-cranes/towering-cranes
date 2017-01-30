@@ -1,4 +1,4 @@
-var db = require('../../database/db.js');
+var db = require('./db.js');
 
 exports.createUser = function(user, callback) {
   db.User.findOrCreate({where: user}).spread(function(user, created) {

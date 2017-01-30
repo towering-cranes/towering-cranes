@@ -1,8 +1,8 @@
 var express = require('express');
 var Sequelize = require('sequelize');
 var bodyParser = require('body-parser');
-var db = require('../database/db.js');
-var dbHelpers = require('./routeHelpers/database.js');
+var db = require('./database/db.js');
+var dbHelpers = require('./database/databaseHelpers.js');
 var app = express();
 app.use(express.static(__dirname + "/../client"));
 app.use(bodyParser.json());
