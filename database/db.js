@@ -15,11 +15,11 @@ var Game = db.define('Game', {
   aliases: Sequelize.STRING,
   image: Sequelize.STRING,
   releaseDate: Sequelize.DATE,
-  publishers: Sequelize.STRING,
-  developers: Sequelize.STRING,
+  publishers: Sequelize.TEXT, // long JSON
+  developers: Sequelize.TEXT, // long JSON
   summary: Sequelize.STRING,
-  similarGames: Sequelize.STRING,
-  videos: Sequelize.STRING
+  similarGames: Sequelize.TEXT, // long JSON
+  videos: Sequelize.TEXT // long JSON
 });
 
 
@@ -58,14 +58,15 @@ Game.belongsToMany(Genre, {through: 'GameGenre'});
 Genre.belongsToMany(Game, {through: 'GameGenre'});
 
 //creates tables in mysql if they don't exist
-User.sync();
-Game.sync();
-Franchise.sync();
-Platform.sync();
-Genre.sync();
-GameLibrary.sync();
-GamePlatform.sync();
-GameGenre.sync();
+// User.sync();
+// Game.sync();
+// Franchise.sync();
+// Platform.sync();
+// Genre.sync();
+// GameLibrary.sync();
+// GamePlatform.sync();
+// GameGenre.sync();
+db.sync(); // Sequelize decides what order to avoid errors
 
 //export them for use
 
