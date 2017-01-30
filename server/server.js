@@ -7,6 +7,7 @@ app.use(express.static(__dirname + "/../client"));
 app.use(bodyParser.json());
 var port = process.env.PORT || 8080;
 
+// Add a user to db
 app.post('/users', function(req, res) {
   var requestObj = req.body;
   var newUser = {
@@ -23,6 +24,7 @@ app.post('/users', function(req, res) {
   });
 });
 
+// Add game to collection and database if game isn't in db
 app.post('/games', function(req, res) {
   var newGame = req.body;
   var addGame = function(gameObj) {
@@ -57,8 +59,32 @@ app.post('/games', function(req, res) {
   addGame(newGame);
 });
 
+// Remove game from user's collection
+app.delete('/games', function(req, res) {
+  var game = req.body.results;
+  var user = req.body.username;
+  // Delete game from database
+});
+
+// Filter by game's genre
+app.get('/games/genre', function(req, res) {
+  var genre = req.body.genre;
+  var user = req.body.username;
+  // Filter user's game by genre
+});
+
+app.get('/games/platform', function(req, res) {
+  var platform = req.body.platform;
+  var user = req.body.username;
+  //Filter user games by platform
+});
+
+app.get('/games/search', function(req, res) {
+  var keyword = req.body.keyword;
+
+  //Search Giant Bomb API by keyword
+});
+
 var server = app.listen(port, function() {
   console.log('Running on port: ', port);
 });
-
-

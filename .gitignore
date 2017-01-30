@@ -5,3 +5,7 @@ build/
 dist/
 node_modules/
 server/config/keys.js
+
+# Floobits #
+.floo
+.flooignore
