@@ -10,7 +10,6 @@ app.controller('SearchController', function($scope, giantBomb) {
 
   giantBomb.searchByTerm('pokemon', function(res) {
     $scope.search.results = res.data;
-    console.log($scope.search.results);
   });
 
   // giantBomb.searchById(24024, function(res) {
