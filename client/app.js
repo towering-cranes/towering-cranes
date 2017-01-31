@@ -1,6 +1,7 @@
 angular.module('gamemon', [
   'gameMon.gameCollection',
   'gameMon.search',
+  'gameMon.modal',
   'ngRoute'
   ])
 .config(function($routeProvider) {

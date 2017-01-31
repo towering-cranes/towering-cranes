@@ -96,10 +96,46 @@
 
 <!--Game Modal Window Area -->
 <!-- Needs a controller to GET data from db/API and display add/remove from collection button-->
-<!-- Modal window -->
-<div class='modal' id="game0">
+<!-- Modal window (Not currently mobile friendly)-->
+<div class='modal' id="game0" ng-controller="ModalController">
   <div class="modal-content">
-  <img class='skin-splash center-align' src='https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Trundle_0.jpg' />
+    <div class="row">
+      <div class="col s3">
+        <img class='skin-splash center-align' src='https://ddragon.leagueoflegends.com/cdn/img/champion/loading/Trundle_0.jpg' />
+      </div>
+      <div class="col s7 push-s1">
+        <div class="row">
+          <div class="col s6">
+            <h3>Title (year)</h3>
+            <h5>Publisher</h5>
+          </div>
+            <div class="col s1 push-s7">
+              <!-- add button -->
+              <a class="right btn-floating btn-large waves-effect waves-light teal">
+                  <i class="material-icons">add</i>
+              </a>
+            </div>
+          </div>
+
+        <div class="row">
+          <div class="deck">
+          Lorem ipsum dolor sit amet, eos integre legimus ullamcorper ad, debet minimum mei te, ne inermis vituperata mei. Nec patrioque accommodare conclusionemque in, in pro ceteros liberavisse. Cu his autem concludaturque, cu vocibus molestie vis. Sit ut fastidii dissentias comprehensam.
+
+          Ponderum phaedrum id cum, te mel singulis volutpat cotidieque. Te quo congue quando. Nam ei hinc prompta accommodare, putent commodo adipisci no est. At alia purto sea, ne zril quidam per. Aeque intellegam et vis, per case latine eloquentiam at.
+
+          </div>
+        </div>
+          <!-- Game details -->
+        <hr>
+        <!--carousel similar games-->
+        <h5>Related Games</h5>
+        <div carousel full-width="true" indicators="true">
+          <div ng-repeat="games in data.similarGames">
+            <a class="carousel-item" href="#!"><img src="http://ddragon.leagueoflegends.com/cdn/7.2.1/img/champion/Trundle.png"></a>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 <!-- End of modal window -->
