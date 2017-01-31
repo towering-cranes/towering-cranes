@@ -3,6 +3,7 @@ var Sequelize = require('sequelize');
 var bodyParser = require('body-parser');
 var db = require('./database/db.js');
 var dbHelpers = require('./database/databaseHelpers.js');
+var giantBombHelpers = require('./giantBomb/giantBombHelpers.js');
 var app = express();
 app.use(express.static(__dirname + "/../client"));
 app.use(bodyParser.json());
@@ -75,10 +76,20 @@ app.get('/games/platform', function(req, res) {
   //Filter user games by platform
 });
 
-app.get('/games/search', function(req, res) {
-  var keyword = req.body.keyword;
+app.get('/games/search/keyword/:keyword', function(req, res) {
+  var keyword = req.params.keyword;
 
-  //Search Giant Bomb API by keyword
+  giantBombHelpers.searchForGames(keyword, function(err, games) {
+    if (err) {
+      res.sendStatus(404);
+    } else {
+      res.json(games);
+    }
+  });
+});
+
+app.get('/games/search/id', function(req, res) {
+
 });
 
 var server = app.listen(port, function() {
