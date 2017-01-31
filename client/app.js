@@ -7,7 +7,7 @@ angular.module('gamemon', [
 .config(function($routeProvider) {
   $routeProvider
   .when('/', {
-    templateUrl: 'home/home.html'
+    templateUrl: 'main/main.html'
   })
   .when('/signin', {
     templateUrl: 'user/signin.html'
