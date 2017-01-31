@@ -20,7 +20,7 @@ var Game = db.define('Game', {
   franchises: Sequelize.TEXT,
   publishers: Sequelize.TEXT,
   developers: Sequelize.TEXT,
-  summary: Sequelize.STRING,
+  summary: Sequelize.TEXT,
   similarGames: Sequelize.TEXT,
   videos: Sequelize.TEXT
 });

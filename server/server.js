@@ -3,6 +3,7 @@ var Sequelize = require('sequelize');
 var bodyParser = require('body-parser');
 var db = require('./database/db.js');
 var dbHelpers = require('./database/databaseHelpers.js');
+var giantBombHelpers = require('./giantBomb/giantBombHelpers.js');
 var app = express();
 app.use(express.static(__dirname + "/../client"));
 app.use(bodyParser.json());
@@ -29,7 +30,7 @@ app.post('/users', function(req, res) {
 app.post('/games', function(req, res) {
   var newGame = req.body;
   var user = req.body.username;
-  var game = req.body.results;
+  var game = req.body;
 
   dbHelpers.addGameToCollection(user, game, function(created) {
     if (created) {
@@ -50,7 +51,7 @@ app.get('/users/games/:username', function(req, res) {
 
 // Remove game from user's collection
 app.delete('/games', function(req, res) {
-  var gameTitle = req.body.results.name;
+  var gameTitle = req.body.name;
   var user = req.body.username;
   // Delete game from database
   dbHelpers.removeGameFromCollection(user, gameTitle, function(destroyed) {
@@ -62,23 +63,41 @@ app.delete('/games', function(req, res) {
   });
 });
 
-// Filter by game's genre
-app.get('/games/genre', function(req, res) {
-  var genre = req.body.genre;
-  var user = req.body.username;
-  // Filter user's game by genre
+// // Filter by game's genre
+// app.get('/games/genre', function(req, res) {
+//   var genre = req.body.genre;
+//   var user = req.body.username;
+//   // Filter user's game by genre
+// });
+
+// app.get('/games/platform', function(req, res) {
+//   var platform = req.body.platform;
+//   var user = req.body.username;
+//   //Filter user games by platform
+// });
+
+app.get('/games/search/keyword/:keyword', function(req, res) {
+  var keyword = req.params.keyword;
+
+  giantBombHelpers.searchForGames(keyword, function(err, games) {
+    if (err) {
+      res.sendStatus(404);
+    } else {
+      res.json(games);
+    }
+  });
 });
 
-app.get('/games/platform', function(req, res) {
-  var platform = req.body.platform;
-  var user = req.body.username;
-  //Filter user games by platform
-});
+app.get('/games/search/id/:id', function(req, res) {
+  var id = req.params.id;
 
-app.get('/games/search', function(req, res) {
-  var keyword = req.body.keyword;
-
-  //Search Giant Bomb API by keyword
+  giantBombHelpers.getGameById(id, function(err, game) {
+    if (err) {
+      res.sendStatus(404);
+    } else {
+      res.json(game);
+    }
+  });
 });
 
 var server = app.listen(port, function() {
