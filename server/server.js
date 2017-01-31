@@ -88,8 +88,16 @@ app.get('/games/search/keyword/:keyword', function(req, res) {
   });
 });
 
-app.get('/games/search/id', function(req, res) {
+app.get('/games/search/id/:id', function(req, res) {
+  var id = req.params.id;
 
+  giantBombHelpers.getGameById(id, function(err, game) {
+    if (err) {
+      res.sendStatus(404);
+    } else {
+      res.json(game);
+    }
+  });
 });
 
 var server = app.listen(port, function() {
