@@ -18,11 +18,14 @@ exports.addGameToCollection = function(user, game, callback) {
       aliases: game.aliases, // string
       image: game.image.super_url,
       releaseDate: game.original_release_date,
-      publishers: JSON.stringify(game.publishers), // array of objects
-      developers: JSON.stringify(game.developers), // array of objects
+      genres: JSON.stringify(game.genres), // array of objects
+      platforms: JSON.stringify(game.platforms),
+      franchises: JSON.stringify(game.franchises),
+      publishers: JSON.stringify(game.publishers),
+      developers: JSON.stringify(game.developers),
       summary: game.deck,
-      similarGames: JSON.stringify(game.similar_games), // array of objects
-      videos: JSON.stringify(game.videos.api_detail_url) // array of objects
+      similarGames: JSON.stringify(game.similar_games),
+      videos: JSON.stringify(game.videos.api_detail_url)
     };
     db.Game.findOrCreate({where: {title: game.name}, defaults: newGame}).spread(function(game, created) {
       user.addGame(game); // only needs one direction
@@ -33,6 +36,16 @@ exports.addGameToCollection = function(user, game, callback) {
 
 exports.getGamesFromCollection = function(user, callback) {
   db.sequelize.query(`SELECT users.username,games.* FROM users INNER JOIN gamelibraries ON UserId=users.id INNER JOIN games ON GameId=games.id WHERE users.username="${user}";`).spread(function(games) {
+    games.forEach(function(game) {
+      game.genres = JSON.parse(game.genres);
+      game.platforms = JSON.parse(game.platforms);
+      game.franchises = JSON.parse(game.franchises);
+      game.publishers = JSON.parse(game.publishers);
+      game.developers = JSON.parse(game.developers);
+      game.similarGames = JSON.parse(game.similarGames);
+      game.videos = JSON.parse(game.videos);
+    })
+
     callback(games);
   });
 };
