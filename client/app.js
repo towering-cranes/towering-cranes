@@ -7,13 +7,13 @@ angular.module('gamemon', [
 .config(function($routeProvider) {
   $routeProvider
   .when('/', {
-    templateUrl: 'home.html'
+    templateUrl: 'home/home.html'
   })
   .when('/signin', {
-    templateUrl: 'signin.html'
+    templateUrl: 'user/signin.html'
   })
   .when('/signup', {
-    templateUrl: 'signup.html'
+    templateUrl: 'user/signup.html'
   })
   .otherwise({redirectTo: '/'});
 });
