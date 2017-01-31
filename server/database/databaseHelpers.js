@@ -35,7 +35,7 @@ exports.addGameToCollection = function(user, game, callback) {
 };
 
 exports.getGamesFromCollection = function(user, callback) {
-  db.sequelize.query(`SELECT users.username,games.* FROM users INNER JOIN gamelibraries ON UserId=users.id INNER JOIN games ON GameId=games.id WHERE users.username="${user}";`).spread(function(games) {
+  db.sequelize.query(`SELECT Users.username,games.* FROM Users INNER JOIN GameLibraries ON UserId=Users.id INNER JOIN Games ON GameId=Games.id WHERE Users.username="${user}";`).spread(function(games) {
     games.forEach(function(game) {
       game.genres = JSON.parse(game.genres);
       game.platforms = JSON.parse(game.platforms);
