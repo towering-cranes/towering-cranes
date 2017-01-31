@@ -1,6 +1,9 @@
+<!--Temp button-->
+<i class="material-icons green md-36 center white-text" ng-model='searchModel' ng-init='searchModel = false' ng-click='searchModel=!searchModel'>add</i>
 <!-- Game Collection -->
 <!-- Needs a controller for custom filtering -->
-<div id="gameCollection">
+<div class="row">
+<div id="gameCollection" ng-init="searchModel = false" class='{{searchModel ? "col s8" : "col s12"}}'>
   <div ng-controller="GameCollectionController">
    <nav class="nav-extended blue">
     <div class="nav-content">
@@ -45,12 +48,16 @@
     </ul>
     <!--Add to collection button-->
     <div class="nav-content">
-      <a href="#" class="btn-floating btn-large halfway-fab waves-effect waves-light teal button-collapse show-on-large" data-activates="search-nav" data-sidenav="right" data-menuwidth="400" data-closeonclick="false">
-          <i class="material-icons">add</i>
-      </a>
+<!--       <i class="material-icons blue md-36 center white-text" ng-model='searchModel' ng-init='searchModel = false' ng-click='searchModel=!searchModel'>add</i> -->
+ <!-- <a href="#" class="btn-floating btn-large halfway-fab waves-effect waves-light teal button-collapse show-on-large" data-activates="search-nav" data-sidenav="right" data-menuwidth="400" data-closeonclick="false"> -->
+      <button class="btn-floating btn-large halfway-fab waves-effect waves-light teal" ng-model="searchModel" ng-click="searchModel = !searchModel">
+<!--       <a href="#" class="btn-floating btn-large halfway-fab waves-effect waves-light teal button-collapse show-on-large" ng-model='searchModel' ng-init='searchModel = false' ng-click='searchModel=!searchModel'> -->
+          <i class="material-icons" >add</i>
+      </button>
     </div>
   </nav>
-  <div ng-controller="SearchController">
+
+<!--   <div ng-controller="SearchController">
     <ul id="search-nav" class="side-nav">
       <div class="searchContainer">
         <li><h4>Search Games</h4></li>
@@ -75,7 +82,7 @@
         </div>
       </div>
     </ul>
-  </div>
+  </div> -->
 
     <!-- Games view -->
     <div class="row">
@@ -93,6 +100,29 @@
   </div>
 </div>
 
+<div class="col s4" ng-if="searchModel===true">
+  <div ng-controller="SearchController">
+    <h4>Search Games</h4><br>
+    <input type="text" name="search" placeholder="search"></input><br>
+    <h5>Search Results</h5>
+    <div ng-repeat="game in search.results">
+      <div class="card horizontal">
+        <div class="card-image">
+          <img src="http://lorempixel.com/100/190/nature/6">
+        </div>
+        <div class="card-stacked">
+          <div class="card-content">
+            <p>{{ game.deck }}</p>
+          </div>
+          <div class="card-action">
+            <a href="#">More Details</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
 
 <!--Game Modal Window Area -->
 <!-- Needs a controller to GET data from db/API and display add/remove from collection button-->
@@ -138,4 +168,5 @@
     </div>
   </div>
 </div>
+
 <!-- End of modal window -->
