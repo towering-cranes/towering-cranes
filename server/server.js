@@ -30,7 +30,7 @@ app.post('/users', function(req, res) {
 app.post('/games', function(req, res) {
   var newGame = req.body;
   var user = req.body.username;
-  var game = req.body.results;
+  var game = req.body;
 
   dbHelpers.addGameToCollection(user, game, function(created) {
     if (created) {
@@ -51,7 +51,7 @@ app.get('/users/games/:username', function(req, res) {
 
 // Remove game from user's collection
 app.delete('/games', function(req, res) {
-  var gameTitle = req.body.results.name;
+  var gameTitle = req.body.name;
   var user = req.body.username;
   // Delete game from database
   dbHelpers.removeGameFromCollection(user, gameTitle, function(destroyed) {
@@ -63,18 +63,18 @@ app.delete('/games', function(req, res) {
   });
 });
 
-// Filter by game's genre
-app.get('/games/genre', function(req, res) {
-  var genre = req.body.genre;
-  var user = req.body.username;
-  // Filter user's game by genre
-});
+// // Filter by game's genre
+// app.get('/games/genre', function(req, res) {
+//   var genre = req.body.genre;
+//   var user = req.body.username;
+//   // Filter user's game by genre
+// });
 
-app.get('/games/platform', function(req, res) {
-  var platform = req.body.platform;
-  var user = req.body.username;
-  //Filter user games by platform
-});
+// app.get('/games/platform', function(req, res) {
+//   var platform = req.body.platform;
+//   var user = req.body.username;
+//   //Filter user games by platform
+// });
 
 app.get('/games/search/keyword/:keyword', function(req, res) {
   var keyword = req.params.keyword;
