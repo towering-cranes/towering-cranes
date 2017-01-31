@@ -1,0 +1,141 @@
+<!-- Game Collection -->
+<!-- Needs a controller for custom filtering -->
+<div id="gameCollection">
+  <div ng-controller="GameCollectionController">
+   <nav class="nav-extended blue">
+    <div class="nav-content">
+      <h3>Game Collection</h3>
+    </div>
+    <!--Nav bar-->
+    <div class="nav-wrapper">
+      <ul class="left hide-on-med-and-down">
+        <li>
+          <form>
+            <div class="input-field">
+              <input id="search" type="search" placeholder="Name/Franchise Filter" required>
+              <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+              <i class="material-icons">close</i>
+            </div>
+          </form>
+        </li>
+        <li>
+          <a class='dropdown-button' href='javascript:void(0);' data-activates='demoDropdown' dropdown data-hover="true">
+              Platform
+          </a>
+        </li>
+        <li>
+          <a class='dropdown-button' href='javascript:void(0);' data-activates='demoDropdown' dropdown data-hover="true">
+              Genre
+          </a>
+        </li>
+        </ul>
+        <ul class="right hide-on-med-and-down views">
+        <li>Views</li>
+        <li><i class="material-icons md-18">view_list</i></li>
+        <li><i class="material-icons md-18">view_module</i></li>
+      </ul>
+    </div>
+    <!-- Dropdown Structure -->
+    <ul id='demoDropdown' class='dropdown-content'>
+        <li><a href="javascript:void(0);">Link 1</a></li>
+        <li><a href="javascript:void(0);">Link 2</a></li>
+        <li><a href="javascript:void(0);">Link 3</a></li>
+        <li><a href="javascript:void(0);">Link 4</a></li>
+        <li><a href="javascript:void(0);">Link 5</a></li>
+    </ul>
+    <!--Add to collection button-->
+    <div class="nav-content">
+      <a href="#" class="btn-floating btn-large halfway-fab waves-effect waves-light teal button-collapse show-on-large" data-activates="search-nav" data-sidenav="right" data-menuwidth="400" data-closeonclick="false">
+          <i class="material-icons">add</i>
+      </a>
+    </div>
+  </nav>
+  <div ng-controller="SearchController">
+    <ul id="search-nav" class="side-nav">
+      <div class="searchContainer">
+        <li><h4>Search Games</h4></li>
+        <li><input type="text" name="search" placeholder="search"></input></li>
+        <li><h5>Search Results</h5></li>
+        <div ng-repeat="game in search.results">
+          <li>
+          <div class="card horizontal">
+            <div class="card-image">
+              <img src="http://lorempixel.com/100/190/nature/6">
+            </div>
+            <div class="card-stacked">
+              <div class="card-content">
+                <p>{{ game.deck }}</p>
+              </div>
+              <div class="card-action">
+                <a href="#">More Details</a>
+              </div>
+            </div>
+          </div>
+          </li>
+        </div>
+      </div>
+    </ul>
+  </div>
+
+    <!-- Games view -->
+    <div class="row">
+      <div class="game" ng-repeat="game in data.games">
+        <!-- game -->
+        <div class="col s2">
+          <!-- img, description etc UPDATE to include final property of data object-->
+          <a class="gameImage" data-target="game0" modal>
+          <img class='champion-icon' src='http://ddragon.leagueoflegends.com/cdn/7.2.1/img/champion/Trundle.png'/>
+          <!-- <img src="data.games.image"> -->
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!--Game Modal Window Area -->
+<!-- Needs a controller to GET data from db/API and display add/remove from collection button-->
+<!-- Modal window (Not currently mobile friendly)-->
+<div class='modal' id="game0" ng-controller="ModalController">
+  <div class="modal-content">
+    <div class="row">
+      <div class="col s3">
+        <img class='skin-splash center-align' src='https://ddragon.leagueoflegends.com/cdn/img/champion/loading/Trundle_0.jpg' />
+      </div>
+      <div class="col s7 push-s1">
+        <div class="row">
+          <div class="col s6">
+            <h3>Title (year)</h3>
+            <h5>Publisher</h5>
+          </div>
+            <div class="col s1 push-s7">
+              <!-- add button -->
+              <a class="right btn-floating btn-large waves-effect waves-light teal">
+                  <i class="material-icons">add</i>
+              </a>
+            </div>
+          </div>
+
+        <div class="row">
+          <div class="deck">
+          Lorem ipsum dolor sit amet, eos integre legimus ullamcorper ad, debet minimum mei te, ne inermis vituperata mei. Nec patrioque accommodare conclusionemque in, in pro ceteros liberavisse. Cu his autem concludaturque, cu vocibus molestie vis. Sit ut fastidii dissentias comprehensam.
+
+          Ponderum phaedrum id cum, te mel singulis volutpat cotidieque. Te quo congue quando. Nam ei hinc prompta accommodare, putent commodo adipisci no est. At alia purto sea, ne zril quidam per. Aeque intellegam et vis, per case latine eloquentiam at.
+
+          </div>
+        </div>
+          <!-- Game details -->
+        <hr>
+        <!--carousel similar games-->
+        <h5>Related Games</h5>
+        <div carousel full-width="true" indicators="true">
+          <div ng-repeat="games in data.similarGames">
+            <a class="carousel-item" href="#!"><img src="http://ddragon.leagueoflegends.com/cdn/7.2.1/img/champion/Trundle.png"></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End of modal window -->
