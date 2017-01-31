@@ -6,7 +6,7 @@ exports.searchForGames = function(searchTerm, callback) {
   var options = {
     url: `http://www.giantbomb.com/api/search/?api_key=${giantBombApiKey}&format=json&query="${searchTerm}"&resources=game`,
     headers: {
-      'User-Agent': 'gamemon'
+      'User-Agent': 'gamemon' // Giant Bomb API requires user agent to be filled
     }
   };
 
