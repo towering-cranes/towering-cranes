@@ -1,9 +1,8 @@
-<!--Temp button-->
-<i class="material-icons green md-36 center white-text" ng-model='searchModel' ng-init='searchModel = false' ng-click='searchModel=!searchModel'>add</i>
+
 <!-- Game Collection -->
 <!-- Needs a controller for custom filtering -->
 <div class="row">
-<div id="gameCollection" ng-init="searchModel = false" class='{{searchModel ? "col s8" : "col s12"}}'>
+<div id="gameCollection" ng-init="searchModel = false" class='{{searchModel ? "col s8" : "col s11"}}'>
   <div ng-controller="GameCollectionController">
    <nav class="nav-extended blue">
     <div class="nav-content">
@@ -47,14 +46,12 @@
         <li><a href="javascript:void(0);">Link 5</a></li>
     </ul>
     <!--Add to collection button-->
-    <div class="nav-content">
-<!--       <i class="material-icons blue md-36 center white-text" ng-model='searchModel' ng-init='searchModel = false' ng-click='searchModel=!searchModel'>add</i> -->
+<!--     <div class="nav-content"> -->
  <!-- <a href="#" class="btn-floating btn-large halfway-fab waves-effect waves-light teal button-collapse show-on-large" data-activates="search-nav" data-sidenav="right" data-menuwidth="400" data-closeonclick="false"> -->
-      <button class="btn-floating btn-large halfway-fab waves-effect waves-light teal" ng-model="searchModel" ng-click="searchModel = !searchModel">
-<!--       <a href="#" class="btn-floating btn-large halfway-fab waves-effect waves-light teal button-collapse show-on-large" ng-model='searchModel' ng-init='searchModel = false' ng-click='searchModel=!searchModel'> -->
+<!--       <a href="#" class="btn-floating btn-large halfway-fab waves-effect waves-light teal button-collapse show-on-large" ng-model='searchModel' ng-init='searchModel = false' ng-click='searchModel=!searchModel'>
           <i class="material-icons" >add</i>
-      </button>
-    </div>
+      </a>
+    </div> -->
   </nav>
 
 <!--   <div ng-controller="SearchController">
@@ -100,7 +97,9 @@
   </div>
 </div>
 
-<div class="col s4" ng-if="searchModel===true">
+
+
+<div class="col s3" ng-if="searchModel===true">
   <div ng-controller="SearchController">
     <h4>Search Games</h4><br>
     <input type="text" name="search" placeholder="search"></input><br>
@@ -122,6 +121,14 @@
     </div>
   </div>
 </div>
+<!--Temp button-->
+ <a class="btn-floating btn-large waves-effect waves-light teal right" ng-model='searchModel' ng-click='searchModel=!searchModel'>
+ <i class="material-icons" ng-if="searchModel===false">add</i>
+ <i class="material-icons" ng-if="searchModel===true">remove</i>
+ </a>
+<!-- <a id="searchButton" class="waves-effect waves-light btn-large teal col s1" ng-model='searchModel' ng-click='searchModel=!searchModel'>
+Search
+</a> -->
 </div>
 
 <!--Game Modal Window Area -->
@@ -169,4 +176,4 @@
   </div>
 </div>
 
-<!-- End of modal window -->
+<!-- End of modal window
