@@ -51,7 +51,7 @@ app.controller('GameCollectionController', function($scope, UserCollection) {
   // });
 });
 
-app.factory('userCollection', ['$http', function($http) {
+app.factory('UserCollection', ['$http', function($http) {
   var db = {};
 
   db.getUserCollection = function(username, callback) {
