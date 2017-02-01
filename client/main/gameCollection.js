@@ -78,3 +78,21 @@ app.factory('userCollection', ['$http', function($http) {
 
   return db;
 }]);
+
+
+//SAMPLE CUSTOM FILTER
+// app.filter('tagFilter', function() {
+//   return function (items, classFilter) {
+//     if (!items) {
+//       return;
+//     }
+//     var filtered = [];
+//     for (var i = 0; i<Object.keys(items).length; i++) {
+//       var champ = items[Object.keys(items)[i]];
+//       if(champ.tags.indexOf(classFilter) !== -1 || classFilter === '') {
+//         filtered.push(champ);
+//       }
+//     }
+//     return filtered;
+//   };
+// });

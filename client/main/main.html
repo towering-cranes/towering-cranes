@@ -1,12 +1,12 @@
 
 <!-- Game Collection -->
 <!-- Needs a controller for custom filtering -->
-<div class="row">
-<div id="gameCollection" ng-init="searchModel = false" class='{{searchModel ? "col s8" : "col s11"}}'>
+<div class="row" id="gameCollection">
+<div ng-init="searchModel = false" class='{{searchModel ? "col s8" : "col s11"}}'>
   <div ng-controller="GameCollectionController">
    <nav class="nav-extended blue">
     <div class="nav-content">
-      <h3>Game Collection</h3>
+      <h3 class="collectionTitle">Game Collection</h3>
     </div>
     <!--Nav bar-->
     <div class="nav-wrapper">
@@ -17,16 +17,18 @@
               <input id="search" type="search" placeholder="Name/Franchise Filter" required>
               <label class="label-icon" for="search"><i class="material-icons">search</i></label>
               <i class="material-icons">close</i>
+              <!--Tiny "fake" button that gives the search bar functionality-->
+              <input type="submit" style="position: absolute; left: -9999px; width: 1px; height: 1px;"/>
             </div>
           </form>
         </li>
         <li>
-          <a class='dropdown-button' href='javascript:void(0);' data-activates='demoDropdown' dropdown data-hover="true">
+          <a class='dropdown-button' href='javascript:void(0);' data-activates='platformDropdown' dropdown data-hover="true">
               Platform
           </a>
         </li>
         <li>
-          <a class='dropdown-button' href='javascript:void(0);' data-activates='demoDropdown' dropdown data-hover="true">
+          <a class='dropdown-button' href='javascript:void(0);' data-activates='genreDropdown' dropdown data-hover="true">
               Genre
           </a>
         </li>
@@ -38,58 +40,26 @@
       </ul>
     </div>
     <!-- Dropdown Structure -->
-    <ul id='demoDropdown' class='dropdown-content'>
-        <li><a href="javascript:void(0);">Link 1</a></li>
-        <li><a href="javascript:void(0);">Link 2</a></li>
-        <li><a href="javascript:void(0);">Link 3</a></li>
-        <li><a href="javascript:void(0);">Link 4</a></li>
-        <li><a href="javascript:void(0);">Link 5</a></li>
+    <!--Use ng-repeat for all the platforms/genres currently in collection-->
+    <ul id='platformDropdown' class='dropdown-content'>
+        <li><a href="javascript:void(0);">XBox 360</a></li>
     </ul>
-    <!--Add to collection button-->
-<!--     <div class="nav-content"> -->
- <!-- <a href="#" class="btn-floating btn-large halfway-fab waves-effect waves-light teal button-collapse show-on-large" data-activates="search-nav" data-sidenav="right" data-menuwidth="400" data-closeonclick="false"> -->
-<!--       <a href="#" class="btn-floating btn-large halfway-fab waves-effect waves-light teal button-collapse show-on-large" ng-model='searchModel' ng-init='searchModel = false' ng-click='searchModel=!searchModel'>
-          <i class="material-icons" >add</i>
-      </a>
-    </div> -->
+
+    <ul id='genreDropdown' class='dropdown-content'>
+        <li><a href="javascript:void(0);">Shooter</a></li>
+    </ul>
+
   </nav>
-
-<!--   <div ng-controller="SearchController">
-    <ul id="search-nav" class="side-nav">
-      <div class="searchContainer">
-        <li><h4>Search Games</h4></li>
-        <li><input type="text" name="search" placeholder="search"></input></li>
-        <li><h5>Search Results</h5></li>
-        <div ng-repeat="game in search.results">
-          <li>
-          <div class="card horizontal">
-            <div class="card-image">
-              <img src="http://lorempixel.com/100/190/nature/6">
-            </div>
-            <div class="card-stacked">
-              <div class="card-content">
-                <p>{{ game.deck }}</p>
-              </div>
-              <div class="card-action">
-                <a href="#">More Details</a>
-              </div>
-            </div>
-          </div>
-          </li>
-        </div>
-      </div>
-    </ul>
-  </div> -->
-
     <!-- Games view -->
     <div class="row">
+      <span ng-if="data.games.length===0">No games currently in collection. Add games by pressing the plus button on the right.</span>
       <div class="game" ng-repeat="game in data.games">
         <!-- game -->
         <div class="col s2">
           <!-- img, description etc UPDATE to include final property of data object-->
-          <a class="gameImage" data-target="game0" modal>
+          <a data-target="game0" modal>
           <!-- <img class='champion-icon' src='http://ddragon.leagueoflegends.com/cdn/7.2.1/img/champion/Trundle.png'/> -->
-          <img style="height:200px" src="{{ game.image }}">
+          <img class="gameImage" src="{{ game.image }}">
           </a>
         </div>
       </div>
@@ -98,7 +68,7 @@
 </div>
 
 
-
+<!--Search Area -->
 <div class="col s3" ng-if="searchModel===true">
   <div ng-controller="SearchController">
     <h4>Search Games</h4><br>
@@ -110,25 +80,23 @@
           <img src="{{ game.image.small_url }}">
         </div>
         <div class="card-stacked">
-          <div class="card-content">
-            <p>{{ game.deck }}</p>
+          <div class="card-content searchCard">
+            <p class="truncate">{{ game.deck }}</p>
           </div>
-          <div class="card-action">
+<!--           <div class="card-action">
             <a href="#">More Details</a>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
   </div>
 </div>
-<!--Temp button-->
+
+<!--Search button-->
  <a class="btn-floating btn-large waves-effect waves-light teal right" ng-model='searchModel' ng-click='searchModel=!searchModel'>
  <i class="material-icons" ng-if="searchModel===false">add</i>
  <i class="material-icons" ng-if="searchModel===true">remove</i>
  </a>
-<!-- <a id="searchButton" class="waves-effect waves-light btn-large teal col s1" ng-model='searchModel' ng-click='searchModel=!searchModel'>
-Search
-</a> -->
 </div>
 
 <!--Game Modal Window Area -->
