@@ -172,8 +172,10 @@
         <h5>Related Games</h5>
         <div ng-show="!similarGames.length">No related games.</div>
         <div ng-if="similarGames.length" carousel full-width="true" indicators="true">
-          <div ng-repeat="game in similarGames">
-            <a class="carousel-item" target="_blank" ng-href="{{ game.site_detail_url }}"><p>{{ game.name }}</p></a>
+          <div ng-repeat="game in similarGames | limitTo:7">
+            <a class="carousel-item" target="_blank" ng-href="{{ game.site_detail_url }}">
+              <img class="carouselImage" ng-src="{{ game.image }}" />
+            </a>
           </div>
         </div>
       </div>
