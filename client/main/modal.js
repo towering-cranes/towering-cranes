@@ -30,10 +30,23 @@ app.controller('ModalController', ['$scope', 'SelectedGame', '$rootScope', 'gian
     $scope.data.image = game.image ? game.image.small_url : null;
     $scope.canAddToCollection = true;
     $scope.data.giantBombId = game.id;
+
+    var similarGames = [];
+
     giantBomb.searchById(game.id, function(response) {
       var game = response.data;
-      $scope.similarGames = game.similar_games;
+      game.similar_games.forEach(function(game) {
+        giantBomb.searchById(game.id, function(response) {
+          var similarGame = response.data;
+          game.image = similarGame.image.small_url;
+          similarGames.push(game);
+        });
+      });
     });
+
+    setTimeout(function() {
+      $scope.similarGames = similarGames;
+    }, 1000); // wait for similarGames to be populated so carousel has all things
     $scope.inCollection = false;
   });
 
@@ -43,11 +56,28 @@ app.controller('ModalController', ['$scope', 'SelectedGame', '$rootScope', 'gian
     // Set up same format as giantbomb results...
     $scope.data.name = game.title;
     $scope.data.deck = game.summary;
-    // $scope.similarGames = game.similarGames; // Assignment like this doesn't update carousel... suboptimal fix below
+
+    var similarGames = [];
+
     giantBomb.searchById(game.giantBombId, function(response) {
       var game = response.data;
-      $scope.similarGames = game.similar_games;
+      if (game.similar_games) {
+        game.similar_games.forEach(function(game) {
+          giantBomb.searchById(game.id, function(response) {
+            var similarGame = response.data;
+            if (similarGame.image) {
+              game.image = similarGame.image.small_url;
+            }
+            similarGames.push(game);
+          });
+        });
+        setTimeout(function() {
+          $scope.similarGames = similarGames;
+        }, 1000); // wait for similarGames to be populated so carousel has all things
+      }
     });
+
+
     $scope.inCollection = true;
   });
 }]);
