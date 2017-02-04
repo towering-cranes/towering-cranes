@@ -20,8 +20,6 @@ app.controller('LoginController', function(auth, $scope, $location, $http, $wind
   }
   $scope.logout = function(){
     $scope.isLoggedIn = false;
-    $window.location.href ='https://towering-cranes.auth0.com/v2/logout';
-    $location.path('/');
     localStorage.removeItem('profile');
     localStorage.removeItem('token');
   }
