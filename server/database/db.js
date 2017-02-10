@@ -2,8 +2,14 @@
 //only holds database information
 
 var Sequelize = require('sequelize');
-var db = new Sequelize('gamemon', 'root', '', {
-//var db = new Sequelize('gamemon', 'root', /*process.env.DB_PASSWORD,*/'', {
+
+// var db = new Sequelize('gamemon', 'root', 'process.env.DB_PASSWORD', {
+//   define: {
+//     charset: 'utf8mb4'
+//   }
+// });
+
+var db = new Sequelize(process.env.CLEARDB_DATABASE_URL, {
   define: {
     charset: 'utf8mb4'
   }
