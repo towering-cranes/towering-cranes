@@ -3,13 +3,8 @@
 
 var Sequelize = require('sequelize');
 
-// var db = new Sequelize('gamemon', 'root', 'process.env.DB_PASSWORD', {
-//   define: {
-//     charset: 'utf8mb4'
-//   }
-// });
-
-var db = new Sequelize(process.env.CLEARDB_DATABASE_URL, {
+// THIS IS FOR LOCAL DEV
+var db = new Sequelize('gamemon', 'root', '', {
   define: {
     charset: 'utf8mb4'
   }
@@ -27,6 +22,7 @@ var User = db.define('User', {
   password: Sequelize.STRING,
   nickname: {type: Sequelize.STRING, unique: true},
   email: {type: Sequelize.STRING, unique: true},
+  imgame: Sequelize.INTEGER
 });
 
 var Game = db.define('Game', {

@@ -76,3 +76,22 @@ exports.removeGameFromCollection = function(user, game, callback) {
     }
   });
 };
+
+
+exports.findImGameUsers = function(user, gameId, callback) {
+  db.User.findOne({where: {username: user}}).then(function(user) {
+    if (user) {
+      user.imgame = gameId;
+    } else { // handle case that user doesn't exist
+      callback(`${user} doesn't exist or couldn't be found`);
+    }
+  });
+  // Find users with same imgame
+  db.User.findAll({where: {imgame: gameId}}).then(function(users) {
+    if (users) {
+      callback(users);
+    } else { // handle case that there are no matching users
+      callback(null);
+    }
+  });
+};

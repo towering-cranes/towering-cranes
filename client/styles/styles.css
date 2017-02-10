@@ -79,6 +79,16 @@ main {
 .gameImage:hover, .collection-card:hover {
   opacity: 0.7;
 }
+.col .s2 {
+  position: relative;
+}
+.im-game-grid-button {
+  position: absolute;
+  top: 190px;
+  left: 26px;
+  background-color: #2196F3;
+  color: #FFF;
+}
 .searchCard {
   font-size: 14px;
 }
