@@ -10,12 +10,17 @@ angular.module('gamemon', [
   .when('/', {
     templateUrl: 'home/home.html'
   })
-  .when('/gamemon', {
+  .when('/gamemon', { //change this to myprofile?
     templateUrl: 'main/main.html',
     controller: 'LoginController'
   })
-  .when('/signup', {
-    templateUrl: 'user/signup.html'
+  //this is never used and the template doesn't exist
+  // .when('/signup', {
+  //   templateUrl: 'user/signup.html'
+  // })
+  .when('/profile/:username', {
+    templateUrl: 'user/profileview',
+    controller: 'ForeignViewController' // ??
   })
-  .otherwise({redirectTo: '/'});
+  .otherwise({redirectTo: '/gamemon'});
 });

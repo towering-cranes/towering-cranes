@@ -3,6 +3,7 @@
 
 var Sequelize = require('sequelize');
 var db = new Sequelize('gamemon', 'root', '', {
+//var db = new Sequelize('gamemon', 'root', /*process.env.DB_PASSWORD,*/'', {
   define: {
     charset: 'utf8mb4'
   }
