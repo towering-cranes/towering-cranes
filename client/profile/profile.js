@@ -1,8 +1,8 @@
 // controller for viewing another user's collection  -- currently crashing when you try to load it
 var app = angular.module('gameMon.otherCollection', ['ui.materialize', 'gameMon.selectedGame']);
-app.controller('OtherCollectionController', function OtherCollectionController($scope, UserCollection, SelectedGame, $rootScope, $routeParams) {
+app.controller('OtherCollectionController', function OtherCollectionController($scope, ForeignView, SelectedGame, $rootScope, $routeParams) {
   $scope.data = {}; //stores games
-  $scope.username = //localStorage.profile;
+  $scope.username = $routeParams.username//localStorage.profile;
   //$rootScope.username = localStorage.profile;
   //Store games in corresponding objects
   $scope.platforms = {};
@@ -19,10 +19,9 @@ app.controller('OtherCollectionController', function OtherCollectionController($
   $scope.selectGame = function(game) {
     SelectedGame.setCurrentGameFromCollection(game);
   };
-  console.log('hello from profile.js');
 
   var getCollection = function() {
-    UserCollection.getUserCollection($routeParams.username, function(res) { //change to $routeParams.username
+    ForeignView.getUserCollection($routeParams.username, function(res) { //change to $routeParams.username
       //Gets user collection, stores platforms and games in $scope.platforms;
       // Brian: based on $scope.username, which comes from localStorage. We should use this same function to access other users' collecions. But we should have a better way to identify them than their username in the database, which is currently an Auth0 hash. We should be able to search by a simple username.
       $scope.data.games = res.data;
@@ -63,42 +62,29 @@ app.controller('OtherCollectionController', function OtherCollectionController($
   //   getCollection();
   // });
 
-  $rootScope.$on('collectionChange', function(event) {
-    getCollection();
-  });
+  // $rootScope.$on('collectionChange', function(event) {
+  //   getCollection();
+  // });
 
 });
 
-// app.factory('UserCollection', ['$http', function($http) {
-//   var db = {};
+app.factory('ForeignView', ['$http', function($http) {
+  var db = {};
 
-//    //db.addUser = //make a post request to /users
-//     //call add user with whatever local storage user is
-//     //call it with password is password
-//     //specify a callback
-
-//     //db.adduser takes a user object with username password
-//       //make an http post request to /users
-//   db.addUser = function(user, callback){
-//     $http.post('/users', user).then(function(response){
-//       callback(response);
-//     }, failCallback);
-//   };
-
-//   db.getUserCollection = function(username, callback) {
-//     $http.get('/users/games/' + username)
-//       .then(function(response) {
-//         callback(response);
-//       }, failCallback);
-//   };
+  db.getUserCollection = function(username, callback) {
+    $http.get('/users/games/' + username)
+      .then(function(response) {
+        callback(response);
+      }, failCallback);
+  };
 
 
-//   var failCallback = function(response) {
-//     console.log(response);
-//   };
+  var failCallback = function(response) {
+    console.log(response);
+  };
 
-//   return db;
-// }]);
+  return db;
+}]);
 
 //Collection filter
 // app.filter('collectionFilter', function() {
