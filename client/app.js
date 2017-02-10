@@ -3,14 +3,15 @@ angular.module('gamemon', [
   'gameMon.search',
   'gameMon.modal',
   'gameMon.toggle',
+  //'gameMon.otherCollection',
   'ngRoute'
   ])
-.config(function($routeProvider) {
+.config(function appJS($routeProvider) {
   $routeProvider
   .when('/', {
     templateUrl: 'home/home.html'
   })
-  .when('/gamemon', { //change this to myprofile?
+  .when('/gamemon', { //change this to myprofile instead of gamemon?
     templateUrl: 'main/main.html',
     controller: 'LoginController'
   })
@@ -18,9 +19,9 @@ angular.module('gamemon', [
   // .when('/signup', {
   //   templateUrl: 'user/signup.html'
   // })
-  .when('/profile/:username', {
-    templateUrl: 'user/profileview',
-    controller: 'ForeignViewController' // ??
+  .when('/profiles/:username', {
+    templateUrl: 'profile/profileview.html',
+    controller: 'LoginController' // ??
   })
-  .otherwise({redirectTo: '/gamemon'});
+  .otherwise({redirectTo: '/'}); //gamemon instead?
 });

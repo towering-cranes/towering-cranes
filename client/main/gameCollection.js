@@ -1,7 +1,7 @@
 // controller for game collection
 var app = angular.module('gameMon.gameCollection', ['ui.materialize', 'gameMon.selectedGame']);
 app.controller('GameCollectionController', function($scope, UserCollection, SelectedGame, $rootScope) {
-  $scope.data = {};
+  $scope.data = {}; //stores games
   $scope.username = localStorage.profile;
   $rootScope.username = localStorage.profile;
   //Store games in corresponding objects
@@ -21,8 +21,8 @@ app.controller('GameCollectionController', function($scope, UserCollection, Sele
   };
 
   var getCollection = function() {
-    UserCollection.getUserCollection($scope.username, function(res) {
-      //Gets user collection, stores platforms and games in $scope.platforms
+    UserCollection.getUserCollection($scope.username, function(res) { //rootscope instead?
+      //Gets user collection, stores platforms and games in $scope.platforms;
       $scope.data.games = res.data;
       for (var i = 0; i < $scope.data.games.length; i++) {
         var game = $scope.data.games[i];
@@ -56,8 +56,8 @@ app.controller('GameCollectionController', function($scope, UserCollection, Sele
   };
 
   //getCollection();
-  UserCollection.addUser({username: $scope.username, password: 'password'}, function(response){
-    // console.log('User successfully added', $scope.username, typeof $scope.username);
+  UserCollection.addUser({username: $scope.username, password: 'password', nickname: localStorage.name, email: localStorage.email}, function(response){
+    console.log('User successfully added', $scope.username, localStorage.name, localStorage.email);
     getCollection();
   });
 
