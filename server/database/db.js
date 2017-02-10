@@ -3,6 +3,7 @@
 
 var Sequelize = require('sequelize');
 
+// THIS IS FOR LOCAL DEV
 var db = new Sequelize('gamemon', 'root', '', {
   define: {
     charset: 'utf8mb4'
