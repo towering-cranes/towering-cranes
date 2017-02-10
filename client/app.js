@@ -23,5 +23,9 @@ angular.module('gamemon', [
     templateUrl: 'profile/profileview.html',
     controller: 'LoginController' // ??
   })
+  .when('/api/users/imgame', {
+    templateUrl: '',
+    controller: 'ImGameController'
+  })
   .otherwise({redirectTo: '/'}); //gamemon instead?
 });
