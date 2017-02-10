@@ -75,9 +75,13 @@
         <!-- grid layout -->
         <div ng-if="layout === 'grid'">
           <div class="col s2">
-            <a data-target="game0" modal ng-click="selectGame(game)">
-            <img class="gameImage responsive-img z-depth-4" ng-src="{{ game.image }}">
-            </a>
+              <a data-target="game0" modal ng-click="selectGame(game)">
+                <div class="gridImage">
+                  <img class="gameImage responsive-img z-depth-4" ng-src="{{ game.image }}">
+                  <!-- TODO: Find game id or track somehow for imgame page -->
+                  <a class="im-game-button" href="#/imgame/{{ game.title }}">I'm Game</a>
+                </div>
+              </a>
           </div>
         </div>
       <!-- list layout -->
