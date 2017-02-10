@@ -9,6 +9,7 @@ var app = angular.module('gameMon.toggle', ['auth0'])
   });
 
 app.controller('LoginController', function(auth, $scope, $location, $http, $window, $rootScope, $route) {
+  //it looks like auth0 gives you a key in localstorage
   $rootScope.isLoggedIn = localStorage.getItem('profile') ? true : false;
   $scope.login = function(){
     auth.signin({}, function(profile, idToken, accessToken) {

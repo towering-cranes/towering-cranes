@@ -3,19 +3,25 @@ angular.module('gamemon', [
   'gameMon.search',
   'gameMon.modal',
   'gameMon.toggle',
+  //'gameMon.otherCollection',
   'ngRoute'
   ])
-.config(function($routeProvider) {
+.config(function appJS($routeProvider) {
   $routeProvider
   .when('/', {
     templateUrl: 'home/home.html'
   })
-  .when('/gamemon', {
+  .when('/gamemon', { //change this to myprofile instead of gamemon?
     templateUrl: 'main/main.html',
     controller: 'LoginController'
   })
-  .when('/signup', {
-    templateUrl: 'user/signup.html'
+  //this is never used and the template doesn't exist
+  // .when('/signup', {
+  //   templateUrl: 'user/signup.html'
+  // })
+  .when('/profiles/:username', {
+    templateUrl: 'profile/profileview.html',
+    controller: 'LoginController' // ??
   })
-  .otherwise({redirectTo: '/'});
+  .otherwise({redirectTo: '/'}); //gamemon instead?
 });

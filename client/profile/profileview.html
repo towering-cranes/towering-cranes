@@ -1,0 +1,169 @@
+
+<!-- Game Collection for other users -->
+<div class="row" id="gameCollection">
+<div ng-init="searchModel = false" class='{{searchModel ? "col s9" : "col s12"}}'>
+  <div ng-controller="OtherCollectionController">
+   <nav class="nav-extended blue">
+    <div class="nav-content">
+      <h3 class="collectionTitle flow-text">Game Collection</h3>
+    </div>
+    <!--Nav bar-->
+    <div class="nav-wrapper">
+      <ul class="left hide-on-med-and-down">
+        <li>
+          <form>
+            <div class="input-field">
+              <input class="filter-input" id="search" type="search" placeholder="Name/Franchise" ng-model='textFilter' ng-change="setFilter([textFilter, 'text'])" required>
+              <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+              <i class="material-icons">close</i>
+            </div>
+          </form>
+        </li>
+        <li>
+          <a class='dropdown-button' href='javascript:void(0);' data-activates='platformDropdown' dropdown data-hover="true">
+              Platform
+          </a>
+        </li>
+        <li>
+          <a class='dropdown-button' href='javascript:void(0);' data-activates='genreDropdown' dropdown data-hover="true">
+              Genre
+          </a>
+        </li>
+        <li>
+          <a href ng-click="current = ''"> Reset Filters </a>
+        </li>
+        </ul>
+        <ul class="right hide-on-med-and-down views" ng-init="layout = 'grid'">
+          <li>
+            <a class='dropdown-button' href='javascript:void(0);' data-activates='orderDropdown' dropdown data-hover="true">
+                Order By
+            </a>
+          </li>
+        <li>Views</li>
+        <li><a href class="viewButton" ng-class="{active: layout ==='list'}" ng-click="layout = 'list'">
+          <i class="material-icons md-18">view_list</i>
+        </a></li>
+        <li><a href class="viewButton" ng-class="{active: layout ==='grid'}" ng-click="layout = 'grid'">
+          <i class="material-icons md-18">view_module</i>
+        </a></li>
+      </ul>
+    </div>
+    <!-- Dropdown Structure -->
+    <ul id='platformDropdown' class='dropdown-content'>
+      <li ng-repeat="platform in platformArr">
+        <a ng-click="setFilter([platform,'platform'])">{{platform}}</a>
+      </li>
+    </ul>
+
+    <ul id='genreDropdown' class='dropdown-content'>
+      <li ng-repeat="genre in genreArr">
+        <a ng-click="setFilter([genre,'genre'])">{{genre}}</a>
+      </li>
+    </ul>
+
+    <ul id='orderDropdown' class='dropdown-content'>
+      <li><a ng-click="sortOrder = 'title'">Title</a></li>
+      <li><a ng-click="sortOrder = 'releaseDate'">Release Date</a></li>
+    </ul>
+
+  </nav>
+    <!-- Games view -->
+    <div class="row">
+      <span class="white-text" ng-if="data.games.length===0 && isLoggedIn"> No games currently in this user's collection.</span>
+    <!-- <span class="white-text" ng-if="!isLoggedIn">Please log in to start collecting!</span> -->
+      <div class="game" ng-repeat="game in data.games | collectionFilter:current | orderBy: (sortOrder || 'title')">
+        <!-- grid layout -->
+        <div ng-if="layout === 'grid'">
+          <div class="col s2">
+            <a data-target="game0" modal ng-click="selectGame(game)">
+            <img class="gameImage responsive-img z-depth-4" ng-src="{{ game.image }}">
+            </a>
+          </div>
+        </div>
+      <!-- list layout -->
+        <div ng-if="layout === 'list'">
+            <a data-target="game0" modal ng-click="selectGame(game)">
+              <div class="card horizontal collection-card">
+                <div class="card-image">
+                    <img class="listImage" ng-src="{{ game.image }}" />
+                </div>
+                <div class="card-stacked">
+                  <div class="card-content">
+                    <h5>{{game.title}}</h5>
+                    <p class="black-text">{{ game.summary }}</p>
+                  </div>
+                </div>
+              </div>
+            </a>
+        </div>
+      </div> <!-- end of ng-repeat-->
+    </div>
+  </div>
+</div>
+
+<!--Game Modal Window Area -->
+<!-- Modal window (Not currently mobile friendly)-->
+<div class='modal' id="game0" ng-controller="ModalController">
+  <div class="modal-content">
+    <div class="row">
+      <div class="col s3">
+        <img class='modalImage center-align responsive-img z-depth-4' ng-src="{{ data.image }}" />
+      </div>
+      <br>
+      <div class="col s8">
+        <h3>{{ data.name }}</h3>
+        <h4>{{ data.releaseYear }}</h4>
+        <h5 ng-repeat="publisher in data.publishers">{{ publisher.name }}</h5>
+      </div>
+
+      <!-- Game details -->
+
+      <div class="row col s9 offset-s3">
+        <hr>
+        <div class="platforms">
+          <h5>Platforms:</h5>
+          <p ng-show="!data.platforms">No platforms. Sorry.</p>
+          <span ng-repeat="platform in data.platforms">{{ platform.name }} </span>
+        </div>
+        <div class="genres">
+          <h5>Genres:</h5>
+          <p ng-show="!data.genres">No genres. Sorry.</p>
+          <span ng-repeat="genre in data.genres">{{ genre.name }} </span>
+        </div>
+        <div class="franchises">
+          <h5>Franchises:</h5>
+          <p ng-show="!data.franchises">No franchises. Sorry.</p>
+          <span ng-repeat="franchise in data.franchises">{{ franchise.name }} </span>
+        </div>
+
+        <hr>
+
+        <div class="deck">
+          <h5>Summary:</h5>
+          <p>{{ data.deck }}</p>
+        </div>
+
+        <hr>
+
+        <h5>Videos:</h5>
+        <p ng-hide="data.videos.length">No videos. Sorry.</p>
+        <div class="video" ng-repeat="video in data.videos">
+          <a target="_blank" ng-href="{{ video.site_detail_url }}">
+            <p>{{ video.name }}</p>
+          </a>
+        </div>
+
+        <hr>
+
+        <!-- Carousel for similar games -->
+        <h5>Related Games</h5>
+        <div ng-show="!similarGames.length">No related games.</div>
+        <div ng-if="similarGames.length" carousel full-width="true" indicators="true">
+          <div ng-repeat="game in similarGames">
+            <a class="carousel-item" target="_blank" ng-href="{{ game.site_detail_url }}"><p>{{ game.name }}</p></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
