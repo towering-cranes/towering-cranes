@@ -2,7 +2,7 @@
 //only holds database information
 
 var Sequelize = require('sequelize');
-var db = new Sequelize('gamemon', 'root', process.env.DB_PASSWORD, {
+var db = new Sequelize('gamemon', 'root', '', {
   define: {
     charset: 'utf8mb4'
   }
@@ -10,7 +10,9 @@ var db = new Sequelize('gamemon', 'root', process.env.DB_PASSWORD, {
 
 var User = db.define('User', {
   username: {type: Sequelize.STRING, unique: true},
-  password: Sequelize.STRING
+  password: Sequelize.STRING,
+  nickname: Sequelize.STRING,
+  email: Sequelize.STRING
 });
 
 var Game = db.define('Game', {
