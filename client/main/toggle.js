@@ -1,8 +1,8 @@
 var app = angular.module('gameMon.toggle', ['auth0'])
   .config(function(authProvider){
     authProvider.init({
-      domain: 'towering-cranes.auth0.com',
-      clientID: 'QfGpmdzDtxUhduPejeKN8P1TadDU8OqG'
+      domain: 'modern-grasshoppers.auth0.com',
+      clientID: 'bJt92FUnqvxDiGCEwjp107bav3XB4Ek6'
     });
   }).run(function(auth){
     auth.hookEvents();
@@ -12,6 +12,9 @@ app.controller('LoginController', function(auth, $scope, $location, $http, $wind
   $rootScope.isLoggedIn = localStorage.getItem('profile') ? true : false;
   $scope.login = function(){
     auth.signin({}, function(profile, idToken, accessToken) {
+      console.log(profile);
+      localStorage.setItem('name', profile.nickname);
+      localStorage.setItem('email', profile.email);
       localStorage.setItem('profile', profile.user_id);
       localStorage.setItem('token', accessToken);
       $rootScope.isLoggedIn = true;
