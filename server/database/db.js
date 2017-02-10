@@ -9,7 +9,7 @@ var Sequelize = require('sequelize');
 //   }
 // });
 
-var db = new Sequelize(process.env.DB_URL, {
+var db = new Sequelize(process.env.CLEARDB_DATABASE_URL, {
   define: {
     charset: 'utf8mb4'
   }
