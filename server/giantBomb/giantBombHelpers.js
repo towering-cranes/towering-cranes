@@ -1,6 +1,6 @@
 var request = require('request');
 
-var giantBombApiKey = process.env.GIANTBOMB_API_KEY;
+var giantBombApiKey = '664df4aa2d031a2137758d6d453af45b9b78f80d';
 
 exports.searchForGames = function(searchTerm, callback) {
   var options = {
