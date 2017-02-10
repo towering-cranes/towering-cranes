@@ -78,7 +78,7 @@
               <a data-target="game0" modal ng-click="selectGame(game)">
                 <img class="gameImage responsive-img z-depth-4" ng-src="{{ game.image }}">
                 <!-- TODO: Find game id or track somehow for imgame page -->
-                <a class="im-game-button" href="#/imgame/{{ game.title }}">I'm Game</a>
+                <a class="im-game-grid-button" href="#/imgame/{{ game.title }}">I'm Game</a>
               </a>
           </div>
         </div>
@@ -93,6 +93,7 @@
                   <div class="card-content">
                     <h5>{{game.title}}</h5>
                     <p class="black-text">{{ game.summary }}</p>
+                    <a class="im-game-list-button" href="#/imgame/{{ game.title }}"><h5>I'm Game</h5></a>
                   </div>
                 </div>
               </div>
