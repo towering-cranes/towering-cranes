@@ -23,8 +23,8 @@ angular.module('gamemon', [
     templateUrl: 'profile/profileview.html',
     controller: 'LoginController' // ??
   })
-  .when('/api/users/imgame', {
-    templateUrl: '',
+  .when('/imgame/:gametitle', {
+    templateUrl: 'imgame/imgame.html',
     controller: 'ImGameController'
   })
   .otherwise({redirectTo: '/'}); //gamemon instead?
