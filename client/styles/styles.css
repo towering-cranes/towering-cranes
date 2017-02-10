@@ -22,7 +22,12 @@ main {
   margin-right:auto;
   min-height: 500px;
 }
-
+#userCollection {
+  max-width: 95%;
+  margin-left: auto;
+  margin-right:auto;
+  min-height: 500px;
+}
 .views {
   margin-right: 10px;
 }
