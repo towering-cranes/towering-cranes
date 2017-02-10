@@ -11,6 +11,7 @@ var port = process.env.PORT || 8080;
 
 // Add a user to db
 app.post('/users', function(req, res) {
+  console.log(req.body);
   var requestObj = req.body;
   var newUser = {
     username: requestObj.username,
