@@ -15,7 +15,9 @@ app.post('/users', function(req, res) {
   var requestObj = req.body;
   var newUser = {
     username: requestObj.username,
-    password: requestObj.password
+    password: requestObj.password,
+    nickname: requestObj.nickname,
+    email: requestObj.email
   };
 
   dbHelpers.createUser(newUser, function(created) {
@@ -39,6 +41,16 @@ app.post('/games', function(req, res) {
     } else {
       res.send('Game already exists');
     }
+  });
+});
+
+//Adding a gameid to a specific user
+app.post('/api/users/:username/:gameid', function (req, res) {
+  var gameid = req.params.gameid;
+  var user = req.params.username;
+
+  dbHelpers.findImGameUsers(user, gameId, function(users) {
+    res.send(users);
   });
 });
 
