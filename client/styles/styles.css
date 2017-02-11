@@ -85,8 +85,14 @@ blockquote {
   margin: 20px;
   transition: opacity 0.3s;
 }
-.gameImage:hover, .collection-card:hover {
+.gameImage:hover {
   opacity: 0.7;
+}
+.collection-card {
+  background-color: #333;
+}
+.collection-card:hover {
+  background-color: #4d4d4d;
 }
 .col .s2 {
   position: relative;
@@ -96,6 +102,11 @@ blockquote {
   top: 175px;
   left: 26px;
   background-color: #37474f;
+  padding: 7px;
+  border-radius: 5px;
+  color: #FFF;
+}
+.im-game-list-button {
   padding: 7px;
   border-radius: 5px;
   color: #FFF;
@@ -139,7 +150,7 @@ blockquote {
   min-width: 150px;
 }
 .listImage {
-  max-height: 200px;
+  max-height: 400px;
 }
 .card-image {
   padding-top:10px;
