@@ -1,3 +1,4 @@
+//var env = require('dotenv').load();
 var express = require('express');
 var Sequelize = require('sequelize');
 var bodyParser = require('body-parser');
