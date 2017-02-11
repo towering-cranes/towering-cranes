@@ -44,59 +44,6 @@
   <br>
   <div ng-view></div>
 
-
-
-
-
-
-  <div class='container' style='background-color: white; padding: 20px 40px;'>
-    <div class='row'>
-      <div class='col-md-4'>
-        <div class='well'><h3>Online Users</h3><div class='list-group' id='users'></div></div>
-      </div>
-      <div class='col-md-8'><div class='chat' id='chat'></div>
-      <form id='messageForm'>
-        <div class='form-group'>
-          <label>Enter Message</label>
-          <textarea class='form-control' id='message'></textarea>
-          <input type="submit" class='btn btn-primary' value='Send Message' name="" />
-        </div>
-      </form></div>
-    </div>
-  </div>
-
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.2/socket.io.js"></script>
-  <script>
-    var socket = io.connect('http://localhost:8080');
-    socket.on('news', function (data) {
-      console.log("Socket here!");
-      socket.emit('my other event', { my: 'data' });
-    });
-    $(function(){
-      var socket = io.connect();
-      var $messageForm = $('#messageForm');
-      var $message = $('#message');
-      var $chat = $('#chat');
-
-      $messageForm.submit(function(e){
-        e.preventDefault();
-        console.log('Submitted');
-        socket.emit('send message', $message.val());
-        $message.val('');
-      });
-
-      socket.on('new message', function(data) {
-        $chat.append('<div class="well">'+data.msg+'</div>')
-      });
-    });
-  </script>
-
-
-
-
-
-
   <!-- JQuery -->
   <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
   <!-- Angular -->
