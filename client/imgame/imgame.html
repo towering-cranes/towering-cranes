@@ -15,6 +15,8 @@
   <input type="hidden" id="gametitle" value="{{gameTitle}}" />
 </div>
 
+
+
  <div class='container' style='background-color: white; padding: 20px 40px;'>
     <div class='row'>
       <div class='col-md-4'>
@@ -41,6 +43,7 @@
     // });
     $(function(){
       var socket = io.connect();
+      //var namespace = io('/imgame');
       var $messageForm = $('#messageForm');
       var $message = $('#message');
       var $chat = $('#chat');
@@ -71,4 +74,3 @@
 
     });
   </script>
-
