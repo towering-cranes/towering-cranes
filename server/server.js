@@ -4,10 +4,23 @@ var bodyParser = require('body-parser');
 var db = require('./database/db.js');
 var dbHelpers = require('./database/databaseHelpers.js');
 var giantBombHelpers = require('./giantBomb/giantBombHelpers.js');
-var app = express();
+
+var port = process.env.PORT || 8080;
+var app = require('express')();
+var server = app.listen(port, function() {
+  console.log('Running on port: ', port);
+});
 app.use(express.static(__dirname + "/../client"));
 app.use(bodyParser.json({limit: '5mb'}));
-var port = process.env.PORT || 8080;
+
+//Socket.io
+var io = require('socket.io')(server);
+io.on('connection', function(socket) {
+  socket.emit('news', {hello: 'world'});
+  socket.on('my other event', function (data) {
+    console.log(data);
+  });
+});
 
 // Add a user to db
 app.post('/users', function(req, res) {
@@ -135,6 +148,3 @@ app.get('/games/search/id/:id', function(req, res) {
   });
 });
 
-var server = app.listen(port, function() {
-  console.log('Running on port: ', port);
-});
