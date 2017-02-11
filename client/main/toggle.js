@@ -30,6 +30,6 @@ app.controller('LoginController', function(auth, $scope, $location, $http, $wind
     $rootScope.isLoggedIn = false;
     localStorage.removeItem('profile');
     localStorage.removeItem('token');
-    $window.location.href = 'https://localhost:8080';
+    $window.location.href = 'http://localhost:8080';
   }
 });
