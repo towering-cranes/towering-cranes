@@ -16,6 +16,10 @@ main {
   flex: 1 0 auto;
 }
 
+blockquote {
+  border-left-color: #37474f;
+}
+
 #gameCollection {
   max-width: 95%;
   margin-left: auto;
