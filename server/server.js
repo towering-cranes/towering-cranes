@@ -44,13 +44,26 @@ app.post('/games', function(req, res) {
   });
 });
 
-//Adding a gameid to a specific user
-app.post('/api/users/:username/:gameid', function (req, res) {
-  var gameid = req.params.gameid;
+//Getting all the users associated with a specific game
+app.get('/api/users/:gameTitle', function (req, res) {
+  var gameTitle = req.params.gameTitle;
+
+  dbHelpers.findImGameUsers(gameTitle, function(users) {
+    res.send(users);
+  });
+});
+
+//Adding a gameTitle to a specific user
+app.post('/api/users/:username/:gameTitle', function (req, res) {
+  var gameTitle = req.params.gameTitle;
   var user = req.params.username;
 
-  dbHelpers.findImGameUsers(user, gameId, function(users) {
-    res.send(users);
+  dbHelpers.updateImGameUsers(user, gameTitle, function(created) {
+    if (created) {
+      res.send('Game Title added to user');
+    } else {
+      res.send('User was not updated');
+    }
   });
 });
 
