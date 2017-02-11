@@ -95,9 +95,14 @@
                 </div>
                 <div class="card-stacked">
                   <div class="card-content">
-                    <h5>{{game.title}}</h5>
-                    <p class="black-text">{{ game.summary }}</p>
-                    <a class="im-game-list-button" href="#/imgame/{{ game.title }}"><h5>I'm Game</h5></a>
+                    <h5 class="white-text">{{game.title}}</h5>
+                    <blockquote>
+                      <p class="white-text">{{ game.summary }}</p>
+                    </blockquote>
+                    <br>
+                    <a href="#/imgame/{{ game.title }}">
+                      <span class="im-game-list-button teal darken-1">I'm Game</span>
+                    </a>
                   </div>
                 </div>
               </div>

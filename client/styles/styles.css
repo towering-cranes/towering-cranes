@@ -16,6 +16,10 @@ main {
   flex: 1 0 auto;
 }
 
+blockquote {
+  border-left-color: #37474f;
+}
+
 #gameCollection {
   max-width: 95%;
   margin-left: auto;
@@ -81,8 +85,14 @@ main {
   margin: 20px;
   transition: opacity 0.3s;
 }
-.gameImage:hover, .collection-card:hover {
+.gameImage:hover {
   opacity: 0.7;
+}
+.collection-card {
+  background-color: #333;
+}
+.collection-card:hover {
+  background-color: #4d4d4d;
 }
 .col .s2 {
   position: relative;
@@ -91,6 +101,17 @@ main {
   position: absolute;
   top: 175px;
   left: 26px;
+  background-color: #37474f;
+  padding: 7px;
+  border-radius: 5px;
+  color: #FFF;
+}
+.im-game-list-button {
+  padding: 7px;
+  border-radius: 5px;
+  color: #FFF;
+}
+.im-game-inline {
   background-color: #37474f;
   padding: 7px;
   border-radius: 5px;
@@ -112,6 +133,9 @@ main {
   color: #fff;
   text-align: center;
 }
+.user-quote-indent {
+  text-indent: 40px;
+}
 .searchCard {
   font-size: 14px;
 }
@@ -126,7 +150,7 @@ main {
   min-width: 150px;
 }
 .listImage {
-  max-height: 200px;
+  max-height: 400px;
 }
 .card-image {
   padding-top:10px;
