@@ -54,8 +54,8 @@ app.get('/api/users/:gameTitle', function (req, res) {
 });
 
 //Adding a gameTitle to a specific user
-app.post('/api/users/:username/:gameTitle', function (req, res) {
-  var gameTitle = req.params.gameTitle;
+app.post('/api/users/:username', function (req, res) {
+  var gameTitle = req.body.gameTitle;
   var user = req.params.username;
 
   dbHelpers.updateImGameUsers(user, gameTitle, function(created) {
