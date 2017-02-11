@@ -77,17 +77,20 @@ exports.removeGameFromCollection = function(user, game, callback) {
   });
 };
 
-
-exports.findImGameUsers = function(user, gameId, callback) {
+//Updates user to associate with game title
+exports.updateImGameUser = function(user, gameTitle, callback) {
   db.User.findOne({where: {username: user}}).then(function(user) {
     if (user) {
-      user.imgame = gameId;
+      user.updateAttributes({imgame: gameTitle});
     } else { // handle case that user doesn't exist
       callback(`${user} doesn't exist or couldn't be found`);
     }
-  });
+});
+
+//Finds all users associated with game title
+exports.findImGameUsers = function(gameTitle, callback) {
   // Find users with same imgame
-  db.User.findAll({where: {imgame: gameId}}).then(function(users) {
+  db.User.findAll({where: {imgame: gameTitle}}).then(function(users) {
     if (users) {
       callback(users);
     } else { // handle case that there are no matching users
@@ -95,3 +98,20 @@ exports.findImGameUsers = function(user, gameId, callback) {
     }
   });
 };
+
+//Getting user's collection by nickname
+exports.getPublicUserCollection = function(nickname, callback) {
+  db.sequelize.query(`SELECT Users.nickname,Games.* FROM Users INNER JOIN GameLibraries ON UserId=Users.id INNER JOIN Games ON GameId=Games.id WHERE Users.nickname="${nickname}";`).spread(function(games) {
+    games.forEach(function(game) {
+      game.genres = JSON.parse(game.genres);
+      game.platforms = JSON.parse(game.platforms);
+      game.franchises = JSON.parse(game.franchises);
+      game.publishers = JSON.parse(game.publishers);
+      game.developers = JSON.parse(game.developers);
+      game.similarGames = JSON.parse(game.similarGames);
+      game.videos = JSON.parse(game.videos);
+    })
+
+    callback(games);
+  });
+}
