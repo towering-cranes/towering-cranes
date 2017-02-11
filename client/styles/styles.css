@@ -5,7 +5,7 @@ body {
   display: flex;
   min-height: 100vh;
   flex-direction: column;
-  background-color: #0d47a1;
+  background-color: #333;
 }
 
 article img, aside img {
@@ -89,9 +89,11 @@ main {
 }
 .im-game-grid-button {
   position: absolute;
-  top: 190px;
+  top: 175px;
   left: 26px;
-  background-color: #2196F3;
+  background-color: #37474f;
+  padding: 7px;
+  border-radius: 5px;
   color: #FFF;
 }
 .imgameUser {
@@ -136,7 +138,7 @@ main {
 .search-area {
   margin-top: 22px;
   color: white;
-  background-color: #2196F3;
+  background-color: #37474f;
 }
 #search-input {
   padding-left: 5px;
