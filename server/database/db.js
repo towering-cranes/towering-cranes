@@ -22,7 +22,7 @@ var User = db.define('User', {
   password: Sequelize.STRING,
   nickname: {type: Sequelize.STRING, unique: true},
   email: {type: Sequelize.STRING, unique: true},
-  imgame: Sequelize.INTEGER
+  imgame: Sequelize.STRING
 });
 
 var Game = db.define('Game', {
