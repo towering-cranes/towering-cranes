@@ -72,7 +72,7 @@ app.factory('ForeignView', ['$http', function($http) {
   var db = {};
 
   db.getUserCollection = function(username, callback) {
-    $http.get('/users/games/' + username)
+    $http.get('api/users/games/public/' + username)
       .then(function(response) {
         callback(response);
       }, failCallback);

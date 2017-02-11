@@ -85,7 +85,8 @@ exports.updateImGameUser = function(user, gameTitle, callback) {
     } else { // handle case that user doesn't exist
       callback(`${user} doesn't exist or couldn't be found`);
     }
-});
+  });
+};
 
 //Finds all users associated with game title
 exports.findImGameUsers = function(gameTitle, callback) {
@@ -114,4 +115,4 @@ exports.getPublicUserCollection = function(nickname, callback) {
 
     callback(games);
   });
-}
+};

@@ -4,25 +4,28 @@ app.controller('ImGameController', function OtherCollectionController($scope, Fo
   $scope.username = localStorage.profile;
   $rootScope.username = localStorage.profile;
   //Store games in corresponding objects
+  console.log('whats gameTitle?', $routeParams.gametitle);
   $scope.gameTitle = $routeParams.gametitle;
 
   //get all users function
   var getUsers = function() {
+    console.log('getting users');
     ImGameFactory.getGamers($scope.gameTitle, function(res) {
       $scope.data.users = res.data;
+      console.log($scope.data.users);
     });
   }
   //update i'm game status, calls get users on success
   var updateImGameStatus = function() {
-    ImGameFactory.postImGame($scope.username) {
-      function(res) {
-        console.log('user is game!')
-        getUsers();
-      }
-    }
+    console.log('updating status', $scope.username, $scope.gameTitle)
+    ImGameFactory.postImGame($scope.username, $scope.gameTitle, function(res) {
+      console.log('user is game!')
+    })
   }
   //call update, which will call getUsers
   updateImGameStatus();
+  getUsers();
+
 
   //post request for leaving room...
 
@@ -38,24 +41,25 @@ app.factory('ImGameFactory', ['$http', function($http) {
 
   output.postImGame = function(user, gametitle, callback) {
     $http({
-      method: 'GET', url: '/users/imgame/' + user,
-      data: JSON.stringify({name: gametitle})
+      method: 'POST',
+      url: '/api/users/' + user,
+      data: JSON.stringify({gameTitle: gametitle})
     }).then(function(response){
       callback(response);
     }, failCallback);
-  };
+  }
 
   output.getGamers = function(title, callback) {
-    $http.get('/users/imgame/' + title) //
+    $http.get('api/users/' + title) //
       .then(function(response) {
         callback(response);
-      }, failCallback);
-    }
-  };
+    }, failCallback);
+  }
+
 
   var failCallback = function(response) {
-    console.log(response);
+    console.log('err: ', response);
   };
 
-  return db;
+  return output;
 }]);

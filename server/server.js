@@ -57,8 +57,9 @@ app.get('/api/users/:gameTitle', function (req, res) {
 app.post('/api/users/:username', function (req, res) {
   var gameTitle = req.body.gameTitle;
   var user = req.params.username;
+  console.log('inside update user status', gameTitle, user);
 
-  dbHelpers.updateImGameUsers(user, gameTitle, function(created) {
+  dbHelpers.updateImGameUser(user, gameTitle, function(created) {
     if (created) {
       res.send('Game Title added to user');
     } else {
@@ -71,6 +72,14 @@ app.get('/users/games/:username', function(req, res) {
   var user = req.params.username;
 
   dbHelpers.getGamesFromCollection(user, function(games) {
+    res.send(games);
+  })
+});
+
+app.get('/api/users/games/public/:nickname', function(req, res) {
+  var user = req.params.nickname;
+  console.log(user);
+  dbHelpers.getPublicUserCollection(user, function(games) {
     res.send(games);
   })
 });

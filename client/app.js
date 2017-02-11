@@ -4,6 +4,7 @@ angular.module('gamemon', [
   'gameMon.modal',
   'gameMon.toggle',
   'gameMon.otherCollection',
+  'gameMon.imGame',
   'ngRoute'
   ])
 .config(function appJS($routeProvider) {
