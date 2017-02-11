@@ -85,7 +85,8 @@ exports.updateImGameUser = function(user, gameTitle, callback) {
     } else { // handle case that user doesn't exist
       callback(`${user} doesn't exist or couldn't be found`);
     }
-});
+  });
+}
 
 //Finds all users associated with game title
 exports.findImGameUsers = function(gameTitle, callback) {
@@ -97,7 +98,7 @@ exports.findImGameUsers = function(gameTitle, callback) {
       callback(null);
     }
   });
-};
+}
 
 //Getting user's collection by nickname
 exports.getPublicUserCollection = function(nickname, callback) {
@@ -110,8 +111,7 @@ exports.getPublicUserCollection = function(nickname, callback) {
       game.developers = JSON.parse(game.developers);
       game.similarGames = JSON.parse(game.similarGames);
       game.videos = JSON.parse(game.videos);
-    })
-
+    });
     callback(games);
   });
 }
