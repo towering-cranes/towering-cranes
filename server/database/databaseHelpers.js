@@ -114,4 +114,4 @@ exports.getPublicUserCollection = function(nickname, callback) {
     });
     callback(games);
   });
-}
+};

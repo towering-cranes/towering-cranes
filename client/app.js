@@ -3,7 +3,8 @@ angular.module('gamemon', [
   'gameMon.search',
   'gameMon.modal',
   'gameMon.toggle',
-  //'gameMon.otherCollection',
+  'gameMon.otherCollection',
+  'gameMon.imGame',
   'ngRoute'
   ])
 .config(function appJS($routeProvider) {
