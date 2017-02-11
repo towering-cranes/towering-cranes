@@ -26,6 +26,11 @@ app.controller('ImGameController', function OtherCollectionController($scope, Fo
   updateImGameStatus();
   getUsers();
 
+  $scope.$on('$destroy', function() {
+    ImGameFactory.postImGame($scope.username, null, function(res) {
+      console.log('destroyed');
+   })
+  });
 
   //post request for leaving room...
 

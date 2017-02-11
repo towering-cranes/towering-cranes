@@ -91,7 +91,7 @@ exports.updateImGameUser = function(user, gameTitle, callback) {
 //Finds all users associated with game title
 exports.findImGameUsers = function(gameTitle, callback) {
   // Find users with same imgame
-  db.User.findAll({attributes: { exclude: ['username'] }}, {where: {imgame: gameTitle}}).then(function(users) {
+  db.User.findAll({attributes: { exclude: ['username'] }, where: {imgame: gameTitle}}).then(function(users) {
     if (users) {
       callback(users);
     } else { // handle case that there are no matching users
