@@ -1,7 +1,7 @@
 <!-- I'm Game Users -->
 <div class="row" id="userCollection">
   <div ng-controller="ImGameController">
-  <h4 class="imgameTitle">Now viewing users wanting to play {{ gameTitle }}</h4>
+  <h4 class="imgameTitle">Users waiting to play {{ gameTitle }}!</h4>
     <div ng-repeat="user in data.users">
       <div class="col s2">
         <div class="imgameUser">
@@ -13,8 +13,6 @@
     </div> <!-- End of ngRepeat -->
   </div>
 </div>
-
-
 
  <div class='container' style='background-color: white; padding: 20px 40px;'>
     <div class='row'>
