@@ -1,4 +1,15 @@
-<!-- Game Collection -->
+<!-- I'm Game Users -->
 <div class="row" id="userCollection">
-
+  <div ng-controller="ImGameController">
+  <h1>Now viewing users wanting to play {{ gameTitle }}</h1>
+    <div ng-repeat="user in data.users">
+      <div class="col s2">
+        <div class="imgameUser">
+          <p>{{ user.nickname }}</p>
+          <a href="#/profiles/{{nickname}}"><p>View {{ user.nickname }}'s Profile</p></a>
+          <p>{{ user.email }}</p>
+        </div>
+      </div>
+    </div> <!-- End of ngRepeat -->
+  </div>
 </div>

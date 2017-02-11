@@ -94,6 +94,12 @@ main {
   background-color: #2196F3;
   color: #FFF;
 }
+.imgameUser {
+  border-style: solid;
+  border-color: #fff;
+  width: 145px;
+  height: 200px;
+}
 .searchCard {
   font-size: 14px;
 }
