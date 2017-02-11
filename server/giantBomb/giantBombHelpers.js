@@ -1,5 +1,7 @@
 var request = require('request');
 
+// THIS IS FOR LOCAL DEV
+var giantBombApiKey = '';
 
 // THIS IS FOR THE LIVE SERVER ON HEROKU
 // var giantBombApiKey = process.env.GIANTBOMB_API_KEY;
