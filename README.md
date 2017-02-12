@@ -2,18 +2,15 @@
 
 I"m Game is an app for tracking video games in your collection and is a social center for gamers. With thousands of games available in the GiantBomb API, build out a collection of your favorite games. When you feel like gaming, click the "I"m Game" button. Connect with gamers on the worldwide web who love the same games as you do and start chatting to coordinate your next gaming session!
 
-
-[Press release for this project](PRESS-RELEASE.md)
-
 ## Team
-Product Owner: **Brian Hassett**
-Scrum Master: **Michael Chiang**
-Development Team: **Daniel Ritchie**, **Gwynn Dandridge-Perry**
+- Product Owner: **Brian Hassett**
+- Scrum Master: **Michael Chiang**
+- Development Team: **Daniel Ritchie**, **Gwynn Dandridge-Perry**
 
 ## Original Team
-Product Owner: **Andy Walz**
-Scrum Master: **Kevin Jang**
-Development Team: **Eric Forsell**, **Josephine Chen**
+- Product Owner: **Andy Walz**
+- Scrum Master: **Kevin Jang**
+- Development Team: **Eric Forsell**, **Josephine Chen**
 
 ## Usage
 
@@ -38,6 +35,7 @@ $ mysql.server start
  >> $ create database imgame
 $ npm start
 ```
+[Press release for this project](PRESS-RELEASE.md)
 
 ## Postmortem
 [Postmortem](POSTMORTEM.md)
