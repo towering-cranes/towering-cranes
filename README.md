@@ -7,11 +7,6 @@ I"m Game is an app for tracking video games in your collection and is a social c
 - Scrum Master: **Michael Chiang**
 - Development Team: **Daniel Ritchie**, **Gwynn Dandridge-Perry**
 
-## Original Team
-- Product Owner: **Andy Walz**
-- Scrum Master: **Kevin Jang**
-- Development Team: **Eric Forsell**, **Josephine Chen**
-
 ## Usage
 
  > Add games to your collection and join game rooms to chat with other gamers.
@@ -35,6 +30,12 @@ $ mysql.server start
  >> $ create database imgame
 $ npm start
 ```
+## Special Thanks To:
+## Original Team
+- Product Owner: **Andy Walz**
+- Scrum Master: **Kevin Jang**
+- Development Team: **Eric Forsell**, **Josephine Chen**
+
 [Press release for this project](PRESS-RELEASE.md)
 
 ## Postmortem
@@ -46,3 +47,4 @@ $ npm start
 [Contribution guidelines for this project](CONTRIBUTING.md)
 
 [Style guidelines for this project](STYLE-GUIDE.md)
+
