@@ -1,13 +1,13 @@
 <!-- I'm Game Users -->
 <div class="row" id="userCollection">
   <div ng-controller="ImGameController">
-  <h4 class="imgameTitle">Users waiting to play {{ gameTitle }}!</h4>
+  <h4 class="imgameTitle">Users waiting to play {{ gameTitle }}</h4>
     <div ng-repeat="user in data.users">
       <div class="col s2">
         <div class="imgameUser">
-          <p>{{ user.nickname }}</p>
-          <a target="_blank" href="#/profiles/{{user.nickname}}"><p>View {{ user.nickname }}'s Profile</p></a>
-          <p>{{ user.email }}</p>
+          <p class="white-text">{{ user.nickname }}</p>
+          <a target="_blank" href="#/profiles/{{user.nickname}}"><p><span class="im-game-inline teal darken-1">View Collection</span></p></a>
+          <a href="mailto:{{ user.email }}"><p class="white-text"><span class="im-game-inline teal darken-1">Email User</span></p></a>
         </div>
       </div>
     </div> <!-- End of ngRepeat -->
