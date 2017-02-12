@@ -12,7 +12,11 @@
       </div>
     </div> <!-- End of ngRepeat -->
   </div>
+<<<<<<< f8a3aba0c57d3c39ce150a6aaa89094522f98152
   <input type="hidden" id="gametitle" value="{{gameTitle}}" />
+=======
+  <input type='hidden' id='gametitle' value='{{gameTItle}}' />
+>>>>>>> Work on socket chat
 </div>
 
 
@@ -43,7 +47,7 @@
     // });
     $(function(){
       var socket = io.connect();
-      //var namespace = io('/imgame');
+      var namespace = io('/imgame');
       var $messageForm = $('#messageForm');
       var $message = $('#message');
       var $chat = $('#chat');
@@ -74,3 +78,4 @@
 
     });
   </script>
+

@@ -15,6 +15,7 @@ app.use(express.static(__dirname + "/../client"));
 app.use(bodyParser.json({limit: '5mb'}));
 
 ////////////////////Socket.io
+
 //var gameroom = '';
 var connections = [];
 var io = require('socket.io')(server);
@@ -22,7 +23,6 @@ io.on('connection', function(socket) {
   socket.emit('news', {hello: 'world'});
   socket.on('my other event', function (data) {
     console.log(data);
-
   });
 
   connections.push(socket);
