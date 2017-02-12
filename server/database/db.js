@@ -54,16 +54,16 @@ User.belongsToMany(Game, {through: 'GameLibrary'});
 Game.belongsToMany(User, {through: 'GameLibrary'});
 
 // creates tables in mysql if they don't exist
-//db.sync(); // Sequelize decides what order to avoid errors
+db.sync(); // Sequelize decides what order to avoid errors
 
 //force the database to update even if there are changes to the schema
 //only for development use, other wise comment this out and uncomment the db.sync() above
-db.sync({ force: true })
-.then(function(err) {
-    console.log('It worked!');
-  }, function (err) {
-         console.log('An error occurred while creating the table:', err);
-  });
+// db.sync({ force: true })
+// .then(function(err) {
+//     console.log('It worked!');
+//   }, function (err) {
+//     console.log('An error occurred while creating the table:', err);
+// });
 
 //export them for use
 exports.sequelize = db;
