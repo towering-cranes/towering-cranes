@@ -11,7 +11,7 @@ var Sequelize = require('sequelize');
 // });
 
 // THIS IS FOR THE LIVE SERVER ON HEROKU
-var db = new Sequelize(process.env.CLEARDB_DATABASE_URL, {
+var db = new Sequelize(process.env.JAWSDB_URL, {
   define: {
     charset: 'utf8mb4'
   }
