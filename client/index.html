@@ -44,6 +44,14 @@
 
   <!-- JQuery -->
   <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.2/socket.io.js"></script>
+  <script>
+    var socket = io.connect('http://localhost:8080');
+    socket.on('news', function (data) {
+      console.log("Socket here!");
+      socket.emit('my other event', { my: 'data' });
+    });
+  </script>
   <!-- Angular -->
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
   <!-- Materialize -->

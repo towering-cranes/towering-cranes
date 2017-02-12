@@ -4,7 +4,7 @@ app.controller('ImGameController', function OtherCollectionController($scope, Fo
   $scope.username = localStorage.profile;
   $rootScope.username = localStorage.profile;
   //Store games in corresponding objects
-  console.log('whats gameTitle?', $routeParams.gametitle);
+  // console.log('whats gameTitle?', $routeParams.gametitle);
   $scope.gameTitle = $routeParams.gametitle;
 
   //get all users function
