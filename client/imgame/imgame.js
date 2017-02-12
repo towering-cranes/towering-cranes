@@ -19,12 +19,13 @@ app.controller('ImGameController', function OtherCollectionController($scope, Fo
   var updateImGameStatus = function() {
     console.log('updating status', $scope.username, $scope.gameTitle)
     ImGameFactory.postImGame($scope.username, $scope.gameTitle, function(res) {
-      console.log('user is game!')
+      console.log('user is game!');
+      getUsers();
     })
   }
   //call update, which will call getUsers
   updateImGameStatus();
-  getUsers();
+
 
   var setStatusToNull = function() {
     ImGameFactory.postImGame($scope.username, null, function(res) {

@@ -82,6 +82,7 @@ exports.updateImGameUser = function(user, gameTitle, callback) {
   db.User.findOne({where: {username: user}}).then(function(user) {
     if (user) {
       user.updateAttributes({imgame: gameTitle});
+      callback(user);
     } else { // handle case that user doesn't exist
       callback(`${user} doesn't exist or couldn't be found`);
     }
