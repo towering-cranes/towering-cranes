@@ -30,7 +30,6 @@ app.controller('ImGameController', function OtherCollectionController($scope, Fo
     getUsers();
   }, 1000);
 
-
   var setStatusToNull = function() {
     ImGameFactory.postImGame($scope.username, null, function(res) {
       console.log('destroyed');
