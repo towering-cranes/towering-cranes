@@ -6,7 +6,8 @@ var giantBombApiKey = '';
 
 
 // THIS IS FOR THE LIVE SERVER ON HEROKU
-//var giantBombApiKey = process.env.GIANTBOMB_API_KEY;
+
+var giantBombApiKey = process.env.GIANTBOMB_API_KEY;
 
 exports.searchForGames = function(searchTerm, callback) {
   var options = {

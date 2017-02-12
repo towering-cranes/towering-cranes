@@ -4,7 +4,15 @@
 var Sequelize = require('sequelize');
 
 // THIS IS FOR LOCAL DEV
-var db = new Sequelize('gamemon', 'root', '', {
+// var db = new Sequelize('gamemon', 'root', '', {
+//   define: {
+//     charset: 'utf8mb4'
+//   }
+// });
+
+// THIS IS FOR THE LIVE SERVER ON HEROKU
+
+var db = new Sequelize(process.env.JAWSDB_URL, {
   define: {
     charset: 'utf8mb4'
   }
