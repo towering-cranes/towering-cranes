@@ -3,12 +3,13 @@
   <div class="row imgame-users" id="userCollection">
     <div ng-controller="ImGameController">
     <h4 class="imgameTitle">Users waiting to play {{ gameTitle }}</h4>
-      <div ng-repeat="user in data.users">
+      <div class='imgame-user-card' ng-repeat="user in data.users">
         <div class="col s2">
           <div class="imgameUser">
             <p class="white-text">{{ user.nickname }}</p>
-            <!-- <a target="_blank" href="#/profiles/{{user.nickname}}"><p><span class="im-game-inline teal darken-1">View Collection</span></p></a> -->
-            <a href="#/profiles/{{user.nickname}}" data-target="foreign-collection" modal><p><span class="im-game-inline teal darken-1">View Collection</span></p></a>
+            <a target="_blank" href="#/profiles/{{user.nickname}}"><p><span class="im-game-inline teal darken-1">View Collection</span></p></a>
+            <!-- <a href="" data-target="foreign-collection" modal ng-click="getPublicUserCollection(user.nickname, function(games) {
+      res.send(games)})"><p><span class="im-game-inline teal darken-1">View Collection</span></p></a> -->
             <a href="mailto:{{ user.email }}"><p class="white-text"><span class="im-game-inline teal darken-1">Email User</span></p></a>
           </div>
         </div>
@@ -61,7 +62,8 @@
           socket.emit('send message', {message: '<b>'+user+'</b>: '+$message.val(), room: gametitle});
         }
 
-        $message.val('').focus();
+        $message.val('');
+        $message.focus();
       });
 
       socket.on('new message', function(data) {
@@ -78,7 +80,7 @@
 
 
   <!-- Modal window (Not currently mobile friendly)-->
-<div class='modal' id="foreign-collection" ng-controller="ModalController">
+<!-- <div class='modal' id="foreign-collection" ng-controller="ModalController">
   <div class="modal-content">
     <div class="row">
       <div class="col s3">
@@ -89,7 +91,6 @@
 
       </div>
       <div class="col s1">
-        <!-- Close button -->
         <a ng-click="close" class="modal-action modal-close btn-flat right btn-floating btn-large black">
           <i class="material-icons">close</i>
         </a>
@@ -100,7 +101,7 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
 
 <!-- End of modal window -->
 
