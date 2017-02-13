@@ -1,10 +1,13 @@
 // controller for viewing another user's collection  -- currently crashing when you try to load it
 var app = angular.module('gameMon.otherCollection', ['ui.materialize', 'gameMon.selectedGame']);
-app.controller('OtherCollectionController', function OtherCollectionController($scope, ForeignView, SelectedGame, $rootScope, $routeParams) {
+app.controller('OtherCollectionController', function OtherCollectionController($scope, ForeignView, SelectedGame, $rootScope, $routeParams, $location) {
   $scope.data = {}; //stores games
   $scope.username = $routeParams.username//localStorage.profile;
   //$rootScope.username = localStorage.profile;
   //Store games in corresponding objects
+  if($scope.username = localStorage.name) {
+    $location.path('/gamemon');
+  };
   $scope.platforms = {};
   $scope.genres = {};
   //Store just names in array
