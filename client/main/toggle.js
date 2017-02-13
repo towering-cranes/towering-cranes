@@ -9,7 +9,7 @@ var app = angular.module('gameMon.toggle', ['auth0'])
   });
 
 app.controller('LoginController', function(auth, $scope, $location, $http, $window, $rootScope, $route) {
-  //it looks like auth0 gives you a key in localstorage
+  //information sent to localStorage during login process
   $rootScope.isLoggedIn = localStorage.getItem('profile') ? true : false;
   $scope.login = function(){
     auth.signin({}, function(profile, idToken, accessToken) {
@@ -18,6 +18,7 @@ app.controller('LoginController', function(auth, $scope, $location, $http, $wind
       localStorage.setItem('email', profile.email);
       localStorage.setItem('profile', profile.user_id);
       localStorage.setItem('token', accessToken);
+      $rootScope.navUser = localStorage.getItem('name');
       $rootScope.isLoggedIn = true;
       if ($location.path() === '/gamemon') {
         $route.reload();
@@ -26,10 +27,12 @@ app.controller('LoginController', function(auth, $scope, $location, $http, $wind
       }
     });
   }
+  //Destroy items when log out, set navUser to empty, redirect to main landing page
   $scope.logout = function(){
     $rootScope.isLoggedIn = false;
     localStorage.removeItem('profile');
     localStorage.removeItem('token');
+    $rootScope.navUser= '';
     $window.location.href = '/#';
   }
 });
