@@ -16,9 +16,9 @@ app.controller('ImGameController', function OtherCollectionController($scope, Fo
 
   //update i'm game status, calls get users on success
   var updateImGameStatus = function() {
-    console.log('updating status', $scope.username, $scope.gameTitle)
+    //console.log('updating status', $scope.username, $scope.gameTitle)
     ImGameFactory.postImGame($scope.username, $scope.gameTitle, function(res) {
-      console.log('user is game!');
+      //console.log('user is game!');
       getUsers();
     })
   }

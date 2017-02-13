@@ -42,14 +42,16 @@
   <br>
   <div ng-view></div>
 
+
+
   <!-- JQuery -->
   <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+  <!-- Socket.io -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.2/socket.io.js"></script>
   <script>
     var socket = io.connect('/#');
     socket.on('news', function (data) {
       console.log("Socket here!");
-      socket.emit('my other event', { my: 'data' });
     });
   </script>
   <!-- Angular -->

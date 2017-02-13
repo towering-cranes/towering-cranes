@@ -1,46 +1,46 @@
 <!-- I'm Game Users -->
-<div class="row" id="userCollection">
-  <div ng-controller="ImGameController">
-  <h4 class="imgameTitle">Users waiting to play {{ gameTitle }}</h4>
-    <div ng-repeat="user in data.users">
-      <div class="col s2">
-        <div class="imgameUser">
-          <p class="white-text">{{ user.nickname }}</p>
-          <a target="_blank" href="#/profiles/{{user.nickname}}"><p><span class="im-game-inline teal darken-1">View Collection</span></p></a>
-          <a href="mailto:{{ user.email }}"><p class="white-text"><span class="im-game-inline teal darken-1">Email User</span></p></a>
+<div class='imgame-container'>
+  <div class="row imgame-users" id="userCollection">
+    <div ng-controller="ImGameController">
+    <h4 class="imgameTitle">Users waiting to play {{ gameTitle }}</h4>
+      <div ng-repeat="user in data.users">
+        <div class="col s2">
+          <div class="imgameUser">
+            <p class="white-text">{{ user.nickname }}</p>
+            <!-- <a target="_blank" href="#/profiles/{{user.nickname}}"><p><span class="im-game-inline teal darken-1">View Collection</span></p></a> -->
+            <a href="#/profiles/{{user.nickname}}" data-target="foreign-collection" modal><p><span class="im-game-inline teal darken-1">View Collection</span></p></a>
+            <a href="mailto:{{ user.email }}"><p class="white-text"><span class="im-game-inline teal darken-1">Email User</span></p></a>
+          </div>
         </div>
-      </div>
-    </div> <!-- End of ngRepeat -->
+      </div> <!-- End of ngRepeat -->
+    </div>
+    <input type="hidden" id="gametitle" value="{{gameTitle}}" />
   </div>
-  <input type="hidden" id="gametitle" value="{{gameTitle}}" />
-</div>
 
- <div class='container' style='background-color: white; padding: 20px 40px;'>
+
+
+ <div class='container chat-box'>
     <div class='row'>
-      <div class='col-md-4'>
-        <div class='well'><h3>Online Users</h3><div class='list-group' id='users'></div></div>
+      <div class='chat-box-title'>
+        <h4>Live Chat:</h4>
       </div>
-      <div class='col-md-8'><div class='chat' id='chat'></div>
-      <form id='messageForm'>
-        <div class='form-group'>
-          <label>Enter Message</label>
-          <textarea class='form-control' id='message'></textarea>
-          <input type="submit" class='btn btn-primary' value='Send Message' name="" />
-        </div>
-      </form></div>
+        <div class='container chat'><div id='chat'></div></div>
+        <form id='messageForm'>
+          <div class='form-group'>
+            <label>Enter Message</label>
+            <input class='form-control' id='message' />
+            <input onKeyUp="return" type="submit" class='btn btn-primary' value='Send Message' name="" />
+          </div>
+        </form>
     </div>
   </div>
+</div>
 
 
-<!--   <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.2/socket.io.js"></script> -->
   <script>
-    // var socket = io.connect('http://localhost:8080');
-    // socket.on('news', function (data) {
-    //   console.log("Socket here!");
-    //   socket.emit('my other event', { my: 'data' });
-    // });
     $(function(){
       var socket = io.connect();
+      var namespace = io('/imgame');
       var $messageForm = $('#messageForm');
       var $message = $('#message');
       var $chat = $('#chat');
@@ -56,14 +56,17 @@
 
       $messageForm.submit(function(e){
         e.preventDefault();
-        console.log('Submitted');
-        socket.emit('send message', {message: user + ': ' + $message.val(), room: gametitle})//user + ': ' + $message.val());
-        $message.val('');
+        console.log('Submitted', $message.val());
+        if($message.val() !== '') {
+          socket.emit('send message', {message: '<b>'+user+'</b>: '+$message.val(), room: gametitle});
+        }
+
+        $message.val('').focus();
       });
 
       socket.on('new message', function(data) {
-
-        $chat.append('<div class="well">'+data.msg+'</div>')
+        $chat.append('<div class="well">'+data.msg+'</div>');
+        $('.chat').scrollTop($('.chat').prop('scrollHeight'));
       });
 
       socket.on('message', function(data) {
@@ -72,3 +75,32 @@
 
     });
   </script>
+
+
+  <!-- Modal window (Not currently mobile friendly)-->
+<div class='modal' id="foreign-collection" ng-controller="ModalController">
+  <div class="modal-content">
+    <div class="row">
+      <div class="col s3">
+
+      </div>
+      <br>
+      <div class="col s8">
+
+      </div>
+      <div class="col s1">
+        <!-- Close button -->
+        <a ng-click="close" class="modal-action modal-close btn-flat right btn-floating btn-large black">
+          <i class="material-icons">close</i>
+        </a>
+      </div>
+
+      <div class="row col s9">
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- End of modal window -->
+

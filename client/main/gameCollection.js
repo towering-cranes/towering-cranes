@@ -57,7 +57,7 @@ app.controller('GameCollectionController', function($scope, UserCollection, Sele
 
   //getCollection();
   UserCollection.addUser({username: $scope.username, password: 'password', nickname: localStorage.name, email: localStorage.email}, function(response){
-    console.log('User successfully added', $scope.username, localStorage.name, localStorage.email);
+    //console.log('User successfully added', $scope.username, localStorage.name, localStorage.email);
     getCollection();
   });
 
