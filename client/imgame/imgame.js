@@ -9,12 +9,11 @@ app.controller('ImGameController', function OtherCollectionController($scope, Fo
 
   //get all users function
   var getUsers = function() {
-    console.log('getting users');
     ImGameFactory.getGamers($scope.gameTitle, function(res) {
       $scope.data.users = res.data;
-      console.log($scope.data.users);
     });
   }
+
   //update i'm game status, calls get users on success
   var updateImGameStatus = function() {
     console.log('updating status', $scope.username, $scope.gameTitle)
@@ -25,6 +24,11 @@ app.controller('ImGameController', function OtherCollectionController($scope, Fo
   }
   //call update, which will call getUsers
   updateImGameStatus();
+
+  //Invoke getUsers to update social hub view to update users
+  setInterval(function() {
+    getUsers();
+  }, 1000);
 
 
   var setStatusToNull = function() {
