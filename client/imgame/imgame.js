@@ -26,9 +26,9 @@ app.controller('ImGameController', function OtherCollectionController($scope, Fo
   updateImGameStatus();
 
   //Invoke getUsers to update social hub view to update users
-  // setInterval(function() {
-  //   getUsers();
-  // }, 1000);
+  setInterval(function() {
+    getUsers();
+  }, 1000);
 
   var setStatusToNull = function() {
     ImGameFactory.postImGame($scope.username, null, function(res) {
