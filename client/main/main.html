@@ -184,7 +184,8 @@
           <i ng-show="!inCollection" class="material-icons">add</i>
           <i ng-show="inCollection" class="material-icons">remove</i>
         </a>
-        <span><h5>Add/Remove from your Collection</h5></span>
+        <span ng-show="!inCollection"><h5>Add to Collection</h5></span>
+        <span ng-show="inCollection"><h5>Remove from Collection</h5></span>
       </div>
 
       <!-- Game details -->
