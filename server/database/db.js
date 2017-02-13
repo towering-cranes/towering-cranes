@@ -11,19 +11,11 @@ var Sequelize = require('sequelize');
 // });
 
 // THIS IS FOR THE LIVE SERVER ON HEROKU
-
 var db = new Sequelize(process.env.JAWSDB_URL, {
   define: {
     charset: 'utf8mb4'
   }
 });
-
-// THIS IS FOR THE LIVE SERVER ON HEROKU
-// var db = new Sequelize(process.env.JAWSDB_URL, {
-//   define: {
-//     charset: 'utf8mb4'
-//   }
-// });
 
 var User = db.define('User', {
   username: {type: Sequelize.STRING, unique: true},
