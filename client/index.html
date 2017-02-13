@@ -23,6 +23,7 @@
     <div class="nav-wrapper blue-grey darken-3">
       <a href="#/gamemon" class="brand-logo">I'm Game</a>
       <ul id="nav-wrapper container" class="right hide-on-med-and-down" style="margin-right: 140px;" ng-controller="LoginController">
+        <li><a href='#/gamemon'>{{navUser}}</a></li>
         <li><a href="#">About</a></li>
         <li><a href="#/gamemon">My Collection</a></li>
         <li ng-show="!isLoggedIn"><a id = "btn-login" ng-click="login()">Sign In </a></li>
