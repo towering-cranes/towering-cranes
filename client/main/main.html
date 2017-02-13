@@ -129,21 +129,24 @@
         <div class="indeterminate"></div>
       </div>
     </div>
-    <div ng-repeat="game in searchResults">
-      <div class="card horizontal">
-        <div class="card-image">
-          <img class="responsive-img" ng-src="{{ game.image.small_url }}">
-        </div>
-        <div class="card-stacked black-text">
-          <div class="card-content searchCard">
-            <p>{{ game.deck }}</p>
+    <div class='search-results-container'>
+      <div ng-repeat="game in searchResults">
+        <div class="card horizontal">
+          <div class="card-image">
+            <img class="responsive-img" ng-src="{{ game.image.small_url }}">
           </div>
-          <div class="card-action">
-            <a href="" data-target="game0" modal ng-click="selectGame(game)">More Details</a>
+          <div class="card-stacked black-text">
+            <div class="card-content searchCard">
+              <p>{{ game.deck }}</p>
+            </div>
+            <div class="card-action">
+              <a href="" data-target="game0" modal ng-click="selectGame(game)">More Details</a>
+            </div>
           </div>
         </div>
       </div>
     </div>
+
   </div>
 </div>
 
@@ -170,11 +173,18 @@
         <h5 ng-repeat="publisher in data.publishers">{{ publisher.name }}</h5>
       </div>
       <div class="col s1">
-        <!-- Add/Remove button -->
-        <a ng-click="!inCollection ? addGameToCollection(data.giantBombId) : removeGameFromCollection(data.giantBombId)" class="right btn-floating btn-large waves-effect waves-light teal">
+        <!-- Close button -->
+        <a ng-click="close" class="modal-action modal-close btn-flat right btn-floating btn-large black">
+          <i class="material-icons">close</i>
+        </a>
+      </div>
+      <div class="col s9 add-remove">
+        <hr>
+        <a ng-click="!inCollection ? addGameToCollection(data.giantBombId) : removeGameFromCollection(data.giantBombId)" class="left btn-floating btn-large waves-effect waves-light teal add-remove-btn">
           <i ng-show="!inCollection" class="material-icons">add</i>
           <i ng-show="inCollection" class="material-icons">remove</i>
         </a>
+        <span><h5>Add/Remove from your Collection</h5></span>
       </div>
 
       <!-- Game details -->

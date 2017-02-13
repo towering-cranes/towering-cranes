@@ -9,17 +9,17 @@ app.controller('ImGameController', function OtherCollectionController($scope, Fo
 
   //get all users function
   var getUsers = function() {
-    console.log('getting users');
+    //console.log('getting users');
     ImGameFactory.getGamers($scope.gameTitle, function(res) {
       $scope.data.users = res.data;
-      console.log($scope.data.users);
+      //console.log($scope.data.users);
     });
   }
   //update i'm game status, calls get users on success
   var updateImGameStatus = function() {
-    console.log('updating status', $scope.username, $scope.gameTitle)
+    //console.log('updating status', $scope.username, $scope.gameTitle)
     ImGameFactory.postImGame($scope.username, $scope.gameTitle, function(res) {
-      console.log('user is game!');
+      //console.log('user is game!');
       getUsers();
     })
   }

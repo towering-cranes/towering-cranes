@@ -1,3 +1,4 @@
+//var env = require('dotenv').load();
 var express = require('express');
 var Sequelize = require('sequelize');
 var bodyParser = require('body-parser');
@@ -14,6 +15,7 @@ app.use(express.static(__dirname + "/../client"));
 app.use(bodyParser.json({limit: '5mb'}));
 
 ////////////////////Socket.io
+
 //var gameroom = '';
 var connections = [];
 var io = require('socket.io')(server);
@@ -21,7 +23,6 @@ io.on('connection', function(socket) {
   socket.emit('news', {hello: 'world'});
   socket.on('my other event', function (data) {
     console.log(data);
-
   });
 
   connections.push(socket);
@@ -52,7 +53,7 @@ io.on('connection', function(socket) {
 
 // Add a user to db
 app.post('/users', function(req, res) {
-  console.log(req.body);
+  //console.log(req.body);
   var requestObj = req.body;
   var newUser = {
     username: requestObj.username,
@@ -98,7 +99,7 @@ app.get('/api/users/:gameTitle', function (req, res) {
 app.post('/api/users/:username', function (req, res) {
   var gameTitle = req.body.gameTitle;
   var user = req.params.username;
-  console.log('inside update user status', gameTitle, user);
+  //console.log('inside update user status', gameTitle, user);
 
   dbHelpers.updateImGameUser(user, gameTitle, function(created) {
     if (created) {
@@ -119,7 +120,7 @@ app.get('/users/games/:username', function(req, res) {
 
 app.get('/api/users/games/public/:nickname', function(req, res) {
   var user = req.params.nickname;
-  console.log(user);
+  //console.log(user);
   dbHelpers.getPublicUserCollection(user, function(games) {
     res.send(games);
   })
