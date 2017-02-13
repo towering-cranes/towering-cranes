@@ -187,7 +187,7 @@ blockquote {
 }
 .search-results-container {
   height: 500px;
-  overflow: scroll;
+  overflow: auto;
 }
 .card-content.searchCard {
   padding: 10px;
@@ -234,7 +234,7 @@ blockquote {
 
 .chat {
   margin: 20px 0px;
-  overflow: scroll;
+  overflow: auto;
   position: absolute;
   bottom: 130px;
   height: 50%;
