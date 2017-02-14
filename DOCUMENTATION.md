@@ -149,7 +149,8 @@ Front-end uses AngularJS with Materialize/Angular-materialize. Materialize/Angul
 Resources:
 					
 - AngularJS
-- Angular-materialize • Material Icons
+- Angular-materialize 
+- Material Icons
 - Materialize CSS
 
 					
