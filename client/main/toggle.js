@@ -13,7 +13,6 @@ app.controller('LoginController', function(auth, $scope, $location, $http, $wind
   $rootScope.isLoggedIn = localStorage.getItem('profile') ? true : false;
   $scope.login = function(){
     auth.signin({}, function(profile, idToken, accessToken) {
-      //console.log(profile);
       localStorage.setItem('name', profile.nickname);
       localStorage.setItem('email', profile.email);
       localStorage.setItem('profile', profile.user_id);

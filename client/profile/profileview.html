@@ -70,7 +70,6 @@
     <!-- Games view -->
     <div class="row">
       <span class="white-text" ng-if="data.games.length===0 && isLoggedIn"> No games currently in this user's collection.</span>
-    <!-- <span class="white-text" ng-if="!isLoggedIn">Please log in to start collecting!</span> -->
       <div class="game" ng-repeat="game in data.games | collectionFilter:current | orderBy: (sortOrder || 'title')">
         <!-- grid layout -->
         <div ng-if="layout === 'grid'">
@@ -102,7 +101,7 @@
 </div>
 
 <!--Game Modal Window Area -->
-<!-- Modal window (Not currently mobile friendly)-->
+<!-- Modal window -->
 <div class='modal' id="game0" ng-controller="ModalController">
   <div class="modal-content">
     <div class="row">

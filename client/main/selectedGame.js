@@ -4,7 +4,6 @@ var app = angular.module('gameMon.selectedGame', ['gameMon.search', 'gameMon.mod
 app.factory('SelectedGame', ['$http', 'giantBomb', '$rootScope', function($http, giantBomb, $rootScope) {
   var currentGame = {};
   var setCurrentGameFromCollection = function(game) {
-    // console.log('set current game from collection');
     currentGame = game;
     $rootScope.$emit('gameChangeCollection', currentGame);
   };

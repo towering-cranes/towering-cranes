@@ -21,7 +21,7 @@ app.controller('GameCollectionController', function($scope, UserCollection, Sele
   };
 
   var getCollection = function() {
-    UserCollection.getUserCollection($scope.username, function(res) { //rootscope instead?
+    UserCollection.getUserCollection($scope.username, function(res) {
       //Gets user collection, stores platforms and games in $scope.platforms;
       $scope.data.games = res.data;
       for (var i = 0; i < $scope.data.games.length; i++) {
@@ -51,13 +51,10 @@ app.controller('GameCollectionController', function($scope, UserCollection, Sele
           }
         }
       }
-      // console.log($scope.data.games);
     });
   };
 
-  //getCollection();
   UserCollection.addUser({username: $scope.username, password: 'password', nickname: localStorage.name, email: localStorage.email}, function(response){
-    //console.log('User successfully added', $scope.username, localStorage.name, localStorage.email);
     getCollection();
   });
 
@@ -81,13 +78,6 @@ app.directive('autoFocus', function($timeout) {
 app.factory('UserCollection', ['$http', function($http) {
   var db = {};
 
-   //db.addUser = //make a post request to /users
-    //call add user with whatever local storage user is
-    //call it with password is password
-    //specify a callback
-
-    //db.adduser takes a user object with username password
-      //make an http post request to /users
   db.addUser = function(user, callback){
     $http.post('/users', user).then(function(response){
       callback(response);
