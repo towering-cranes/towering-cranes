@@ -4,7 +4,7 @@
 
 ## Summary ##
 
-  I'm Game is a social hub for finding new friends and like minded gamers. Add games to your collection and click "I'm Game" to meet others from around the world who want to play. You can chat with them in real time and view their personal game collections.
+  I'm Game is a social hub for finding new friends and like-minded gamers. Add games to your collection and click "I'm Game" to meet others from around the world who want to play. You can chat with them in real time and view their personal game collections.
 
 ## Problem ##
 
