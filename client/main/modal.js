@@ -10,14 +10,12 @@ app.controller('ModalController', ['$scope', 'SelectedGame', '$rootScope', 'gian
 
   $scope.addGameToCollection = function(giantBombId) {
     UserCollection.addGameToCollection($rootScope.username, giantBombId, function(response) {
-      // console.log(response);
       $rootScope.$emit('collectionChange');
     });
     $scope.inCollection = true;
   };
   $scope.removeGameFromCollection = function(giantBombId) {
     UserCollection.removeGameFromCollection($rootScope.username, giantBombId, function(response) {
-      // console.log(response);
       $rootScope.$emit('collectionChange');
     });
     $scope.inCollection = false;
@@ -50,7 +48,6 @@ app.controller('ModalController', ['$scope', 'SelectedGame', '$rootScope', 'gian
     $scope.data.deck = game.summary;
     $scope.data.releaseYear = game.releaseDate ? game.releaseDate.slice(0, 4) : null;
 
-    // $scope.similarGames = game.similarGames; // Assignment like this doesn't update carousel... suboptimal fix below
     giantBomb.searchById(game.giantBombId, function(response) {
       var game = response.data;
       // $scope.data.videos = game.videos;

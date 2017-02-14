@@ -17,7 +17,6 @@ app.controller('SearchController', function($scope, giantBomb, SelectedGame) {
 
   $scope.selectGame = function(game) {
     SelectedGame.setCurrentGameFromSearch(game);
-    // console.log('get game from search', SelectedGame.getCurrentGame());
   };
 
 });

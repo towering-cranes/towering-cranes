@@ -1,10 +1,9 @@
-var app = angular.module('gameMon.imGame', ['ui.materialize', 'gameMon.selectedGame']); //any other dependencies?
+var app = angular.module('gameMon.imGame', ['ui.materialize', 'gameMon.selectedGame']);
+
 app.controller('ImGameController', function OtherCollectionController($scope, ForeignView, SelectedGame, $rootScope, $routeParams, $window, ImGameFactory) {
-  $scope.data = {}; //stores users
+  $scope.data = {};
   $scope.username = localStorage.profile;
   $rootScope.username = localStorage.profile;
-  //Store games in corresponding objects
-  // console.log('whats gameTitle?', $routeParams.gametitle);
   $scope.gameTitle = $routeParams.gametitle;
 
   //get all users function
@@ -16,9 +15,7 @@ app.controller('ImGameController', function OtherCollectionController($scope, Fo
 
   //update i'm game status, calls get users on success
   var updateImGameStatus = function() {
-    //console.log('updating status', $scope.username, $scope.gameTitle)
     ImGameFactory.postImGame($scope.username, $scope.gameTitle, function(res) {
-      //console.log('user is game!');
       getUsers();
     })
   }
@@ -39,13 +36,6 @@ app.controller('ImGameController', function OtherCollectionController($scope, Fo
   $scope.$on('$destroy', setStatusToNull);
 
   $window.onbeforeunload = setStatusToNull;
-
-  //post request for leaving room...
-
-
-  // $rootScope.$on('collectionChange', function(event) {
-  //   getCollection();
-  // });
 
 });
 
