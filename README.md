@@ -31,7 +31,7 @@ $ npm install
 
 [Press release for this project](PRESS-RELEASE.md)
 
-[Documentation](https://docs.google.com/document/d/1BZt1YdxfmjWVcR1mowcm-WiMLnMVP2NEaD3xpXc05vk/edit?usp=sharing)
+[Documentation](DOCUMENTATION.md)
 
 [Contribution guidelines for this project](CONTRIBUTING.md)
 
