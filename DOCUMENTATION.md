@@ -1,12 +1,10 @@
 ## I’m Game Documentation
 					
- __Product Owner__: Brian Hassett
-__Scrum Master__: Michael Chiang
-__Development Team__: Daniel Ritchie, Gwynn Dandridge-Perry
-
+- __Product Owner__: Brian Hassett
+- __Scrum Master__: Michael Chiang
+- __Development Team__: Daniel Ritchie, Gwynn Dandridge-Perry
 			
 Hack Reactor Legacy Project - Modern Grasshoppers
-					
 					
 ## Contents			
 						 							
@@ -18,14 +16,14 @@ Hack Reactor Legacy Project - Modern Grasshoppers
 						 							
 4.  Server-Side
 							
-4.1 Routes 
-4 4.2 DatabaseHelperFunctions
-4 4.3 GiantBombAPIHelperFunctions
+- 4.1 Routes 
+- 4 4.2 DatabaseHelperFunctions
+- 4 4.3 GiantBombAPIHelperFunctions
 						 							
 5.  Client-Side
 							
-5.1 Files
-5 5.2 UserAuthentication
+- 5.1 Files
+- 5 5.2 UserAuthentication
 						 							
 6. Deployment
 						 							
@@ -120,10 +118,10 @@ Database Routes
 							
 Giant Bomb API Routes				 											 							
 ’/games/search/keyword/:keyword’
-– GET - receives a keyword from the client as a parameter and returns up to 10 games that match the keyword
+- GET - receives a keyword from the client as a parameter and returns up to 10 games that match the keyword
 						 							
 ’/games/search/id/:id’
-– GET - receives a game id from the client as a parameter and returns up to 10 games that match the id					
+- GET - receives a game id from the client as a parameter and returns up to 10 games that match the id					
 					 					
 ## 4.2 Database Helper Functions
 						 							
@@ -198,7 +196,7 @@ The roles of the different files are as follows: • /client/styles/styles.css
 			
 ∗  removeGameFromCollection removes the selected game from the current users collection
 				 							
-–  Holds a custom filter that takes in setFilter(filterOpt) as an input where filterOpt is an array
+- Holds a custom filter that takes in setFilter(filterOpt) as an input where filterOpt is an array
 			
 ∗  custom filter checks for a match in the respective locations of all the objects and returns all matches
 				
@@ -233,11 +231,24 @@ Resources:
 • Auth0 Authentication Service • Auth0 with Angular Module
 		
 ## 6. Deployment
+
 Modern Grasshoppers used Heroku to deploy the app. 
+
+Recommend using a JAWSDB addon if deploying to Heroku. App uses a JAWSDB environment variable and didn’t work well when using a different MySQL addon service. 
+
+Have a single member on your team rebase and push to your Heroku master. 	
 					
 ## 7. Socket.io
 
 Socket.io runs a server on top of a server.  It keeps a live-ear open for activity for socket.io code on the client page in order to facilitate real-time interactions between remote clients.
 
-Socket can be run as a separate server that listens on a different port from the app or it can be implemented to listen to the same port as the app.  We’ve 
+Socket can be run as a separate server that listens on a different port from the app or it can be implemented to listen to the same port as the app.  We’ve set it up on the same port.
+
+It is important to set up the express server and have it listen to a port first before setting io to pay attention to the server (line 8-12 before line 19 of server.js).
+
+On connection the socket is set to an instance of ‘socket’ which gets pushed to an array of live connections for tracking purposes.  This will let you know that the socket is working and how many connections are being made at any point in time.
+
+Then data is transferred back and forth between the client and the server via event-listeners that catch each other’s data based on an event name (like ‘send message’).  The client then displays the message to the user, while the server would take the data and emit or broadcast it to live sockets.  These can be targeted by name if a name variable is passed from the client, or just broadcast generally to all sockets or namespaces.
+
+In our implementation ‘room’ designates the game that a user has indicated they want to play and a unique chat is created just for the time that people remain in the ‘room’. ‘Send message’ is the event that transfers the text from the input box between the client view of the room and the server and back.
 					
