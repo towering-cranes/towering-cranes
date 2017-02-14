@@ -1,24 +1,22 @@
-# GameMon #
+# I'm Game #
 
-## GameMon: The Game Collection Tracker ##
-
-###  Anyone who plays games will love this app because it gets your games organized! ###
+## Never Play Alone ##
 
 ## Summary ##
 
-  GameMon keeps track of all of your games.  It allows you, the user, to dynamically update your list of games.  GameMon also consolidates relevant information associated with each of your games and allows you to search for new games with various filters.  Start tracking your games today!
+  I'm Game is a social hub for finding new friends and like minded gamers. Add games to your collection and click "I'm Game" to meet others from around the world who want to play. You can chat with them in real time and view their personal game collections as well.
 
 ## Problem ##
 
-  It is difficult to keep track of many games especially across consoles.
+  Ever feel like you have no one to play your favorite game with?
 
 ## Solution ##
 
-  It keeps track of your games across consoles.
+  I'm Game quickly connects you with gamers from around the world.
 
 ## Quote ##
 
-  Spend more time enjoying your games instead of searching through them.
+  "We wanted to create a cross-platform social networking site for people who are tired of gaming alone."
 
 ## How to Get Started ##
 
@@ -26,8 +24,8 @@
 
 ## Customer Quote ##
 
-  "I used to spend hours looking through my vast game collection.  With GameMon I can choose a game right away!" -anon
+  "It can be hard to make friends inside of a game or a traditional matchmaking service. With I'm Game, it's easy to meet gamers with similar interests and personalities. I'll never have to play alone again."
 
 ## Closing and Call to Action ##
 
-  We hope you enjoy GameMon.  It is the result of our experiences tracking our game collections.  Check it out at <Insert deployed link>!
+  Enjoy meeting new friends and experiencing your favorite games in a whole new way!
