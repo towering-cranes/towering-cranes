@@ -2,7 +2,16 @@
 //only holds database information
 
 var Sequelize = require('sequelize');
-var db = new Sequelize('gamemon', 'root', process.env.DB_PASSWORD, {
+
+// THIS IS FOR LOCAL DEV
+// var db = new Sequelize('gamemon', 'root', '', {
+//   define: {
+//     charset: 'utf8mb4'
+//   }
+// });
+
+// THIS IS FOR THE LIVE SERVER ON HEROKU
+var db = new Sequelize(process.env.JAWSDB_URL, {
   define: {
     charset: 'utf8mb4'
   }
@@ -10,7 +19,10 @@ var db = new Sequelize('gamemon', 'root', process.env.DB_PASSWORD, {
 
 var User = db.define('User', {
   username: {type: Sequelize.STRING, unique: true},
-  password: Sequelize.STRING
+  password: Sequelize.STRING,
+  nickname: {type: Sequelize.STRING, unique: true},
+  email: {type: Sequelize.STRING, unique: true},
+  imgame: Sequelize.STRING
 });
 
 var Game = db.define('Game', {

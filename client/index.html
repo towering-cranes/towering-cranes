@@ -2,7 +2,7 @@
 <html ng-app = "gamemon">
 <head>
   <meta charset="utf-8"/>
-  <title>GameMon</title>
+  <title>I'm Game</title>
 
   <link rel="shortcut icon" type="image/x-icon" href="assets/favicon.ico">
   <!-- Google Icon Font-->
@@ -20,19 +20,18 @@
 <body>
   <!-- Navigation Bar -->
   <nav>
-    <div class="nav-wrapper blue">
-      <a href="#/gamemon" class="brand-logo">GameMon</a>
+    <div class="nav-wrapper blue-grey darken-3">
+      <a href="#/" class="brand-logo">I'm Game</a>
       <ul id="nav-wrapper container" class="right hide-on-med-and-down" style="margin-right: 140px;" ng-controller="LoginController">
-        <li><a href="#">About</a></li>
-        <li><a href="#/#getstarted">Get Started</a></li>
-        <li><a href="#/#theteam">The Team</a></li>
+        <li><a href='#/gamemon'>{{navUser}}</a></li>
+        <li><a href="#/">About</a></li>
+        <li><a href="#/gamemon">My Collection</a></li>
         <li ng-show="!isLoggedIn"><a id = "btn-login" ng-click="login()">Sign In </a></li>
         <li ng-show="isLoggedIn"><a id = "btn-logout" ng-click="logout()">Sign Out</a></li>
       </ul>
       <ul id="nav-mobile" class="side-nav" style="margin-right: 140px;" ng-controller="LoginController">
         <li><a href="#">About</a></li>
-        <li><a href="#/#getstarted">Get Started</a></li>
-        <li><a href="#/#theteam">The Team</a></li>
+        <li><a href="#/gamemon">My Collection</a></li>
         <li ng-show="!isLoggedIn"><a id = "btn-login" ng-click="login()">Sign In </a></li>
         <li ng-show="isLoggedIn"><a id = "btn-logout" ng-click="logout()">Sign Out</a></li>
       </ul>
@@ -43,8 +42,19 @@
   </nav>
   <br>
   <div ng-view></div>
+
+
+
   <!-- JQuery -->
   <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+  <!-- Socket.io -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.2/socket.io.js"></script>
+  <script>
+    var socket = io.connect('/#');
+    socket.on('news', function (data) {
+      console.log("Socket here!");
+    });
+  </script>
   <!-- Angular -->
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
   <!-- Materialize -->
@@ -56,33 +66,36 @@
   <!-- Angular-route -->
   <script src = "https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular-route.min.js"></script>
   <!-- Angular files -->
+  <script src="imgame/imgame.js"></script>
   <script src="main/selectedGame.js"></script>
   <script src = "main/modal.js"></script>
   <script src = "main/toggle.js"></script>
   <script src = "main/gameCollection.js"></script>
+  <script src = "profile/profile.js"></script>
   <script src = "main/search.js"></script>
+  <script src = "imgame/imgame.js"></script>
   <script src = "app.js"></script>
   <script type="text/javascript">
     $('.button-collapse').sideNav();
   </script>
 </body>
 </main>
-<footer class="page-footer blue">
+<footer class="page-footer blue-grey darken-3">
   <div class="container">
     <div class="row">
       <div class="col l6 s12 m6">
-        <h5 class="white-text">Check us out at GitHub.</h5>
-        <a href="https://github.com/towering-cranes/towering-cranes">
+        <h5 class="white-text">Check us out on GitHub</h5>
+        <a href="https://github.com/Modern-Grasshoppers/im-game">
          <img id="Octocat" src="assets/Octocat.png">
         </a>
       </div>
       <div class="col l4 offset-l2 s12 m6">
         <h5 class="white-text">Team</h5>
         <ul>
-          <li><a class="grey-text text-lighten-3" href="https://github.com/Josephine-Chen">Josephine Chen</a></li>
-          <li><a class="grey-text text-lighten-3" href="https://github.com/CodeRunner00">Eric Forsell</a></li>
-          <li><a class="grey-text text-lighten-3" href="https://github.com/kjng">Kevin Jang</a></li>
-          <li><a class="grey-text text-lighten-3" href="https://github.com/andywalzdesign">Andy Walz</a></li>
+          <li><a class="grey-text text-lighten-3" href="https://github.com/bchasset">Brian Hassett</a></li>
+          <li><a class="grey-text text-lighten-3" href="https://github.com/danjumamilhaus">Daniel Ritchie</a></li>
+          <li><a class="grey-text text-lighten-3" href="https://github.com/gwynndp">Gwynn Dandridge-Perry</a></li>
+          <li><a class="grey-text text-lighten-3" href="https://github.com/michiang">Michael Chiang</a></li>
         </ul>
       </div>
     </div>

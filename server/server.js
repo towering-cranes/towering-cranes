@@ -4,17 +4,58 @@ var bodyParser = require('body-parser');
 var db = require('./database/db.js');
 var dbHelpers = require('./database/databaseHelpers.js');
 var giantBombHelpers = require('./giantBomb/giantBombHelpers.js');
-var app = express();
+
+var port = process.env.PORT || 8080;
+var app = require('express')();
+var server = app.listen(port, function() {
+  console.log('Running on port: ', port);
+});
 app.use(express.static(__dirname + "/../client"));
 app.use(bodyParser.json({limit: '5mb'}));
-var port = process.env.PORT || 8080;
+
+////////////////////Socket.io
+
+var connections = [];
+var io = require('socket.io')(server);
+io.on('connection', function(socket) {
+  socket.emit('news', {hello: 'world'});
+  socket.on('my other event', function (data) {
+    console.log(data);
+  });
+
+  connections.push(socket);
+  console.log('Connected: %s sockets connected', connections.length);
+
+  socket.on('disconnect', function(data) {
+    connections.splice(connections.indexOf(socket), 1);
+    console.log('Disconnected: %s sockets connected', connections.length);
+  });
+
+  socket.on('send message', function(data) {
+    console.log('wut is data------', data);
+    io.sockets.in(data.room).emit('new message', {msg: data.message});
+  });
+
+  socket.on('room', function(room) {
+    gameroom = room
+    socket.join(room, function() {
+      io.to('room', 'a new user has joined the room')
+    })
+    io.sockets.in(room).emit('message', "what's up party people?")
+  });
+
+});
+
+//////////////////////////////
 
 // Add a user to db
 app.post('/users', function(req, res) {
   var requestObj = req.body;
   var newUser = {
     username: requestObj.username,
-    password: requestObj.password
+    password: requestObj.password,
+    nickname: requestObj.nickname,
+    email: requestObj.email
   };
 
   dbHelpers.createUser(newUser, function(created) {
@@ -41,10 +82,41 @@ app.post('/games', function(req, res) {
   });
 });
 
+//Getting all the users associated with a specific game
+app.get('/api/users/:gameTitle', function (req, res) {
+  var gameTitle = req.params.gameTitle;
+
+  dbHelpers.findImGameUsers(gameTitle, function(users) {
+    res.send(users);
+  });
+});
+
+//Adding a gameTitle to a specific user
+app.post('/api/users/:username', function (req, res) {
+  var gameTitle = req.body.gameTitle;
+  var user = req.params.username;
+
+  dbHelpers.updateImGameUser(user, gameTitle, function(created) {
+    if (created) {
+      res.send('Game Title added to user');
+    } else {
+      res.send('User was not updated');
+    }
+  });
+});
+
 app.get('/users/games/:username', function(req, res) {
   var user = req.params.username;
 
   dbHelpers.getGamesFromCollection(user, function(games) {
+    res.send(games);
+  })
+});
+
+app.get('/api/users/games/public/:nickname', function(req, res) {
+  var user = req.params.nickname;
+
+  dbHelpers.getPublicUserCollection(user, function(games) {
     res.send(games);
   })
 });
@@ -62,19 +134,6 @@ app.delete('/games', function(req, res) {
     }
   });
 });
-
-// // Filter by game's genre
-// app.get('/games/genre', function(req, res) {
-//   var genre = req.body.genre;
-//   var user = req.body.username;
-//   // Filter user's game by genre
-// });
-
-// app.get('/games/platform', function(req, res) {
-//   var platform = req.body.platform;
-//   var user = req.body.username;
-//   //Filter user games by platform
-// });
 
 app.get('/games/search/keyword/:keyword', function(req, res) {
   var keyword = req.params.keyword;
@@ -98,8 +157,4 @@ app.get('/games/search/id/:id', function(req, res) {
       res.json(game);
     }
   });
-});
-
-var server = app.listen(port, function() {
-  console.log('Running on port: ', port);
 });

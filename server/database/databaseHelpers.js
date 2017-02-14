@@ -51,12 +51,8 @@ exports.getGamesFromCollection = function(user, callback) {
 };
 
 exports.removeGameFromCollection = function(user, game, callback) {
-  // Find user id
-  //
-  // Find game id
-  //
   // Delete user/game's row in GameLibraries
-  db.User.findOne({where: {username: user}}).then(function(user) {
+  db.User.findOne({attributes: { exclude: ['username'] }, where: {username: user}}).then(function(user) {
     if (user) {
       var userId = user.id;
 
@@ -74,5 +70,45 @@ exports.removeGameFromCollection = function(user, game, callback) {
     } else { // handle case that user doesn't exist
       callback(user);
     }
+  });
+};
+
+//Updates user to associate with game title
+exports.updateImGameUser = function(user, gameTitle, callback) {
+  db.User.findOne({where: {username: user}}).then(function(user) {
+    if (user) {
+      user.updateAttributes({imgame: gameTitle});
+      callback(user);
+    } else { // handle case that user doesn't exist
+      callback(`${user} doesn't exist or couldn't be found`);
+    }
+  });
+}
+
+//Finds all users associated with game title
+exports.findImGameUsers = function(gameTitle, callback) {
+  // Find users with same imgame
+  db.User.findAll({attributes: { exclude: ['username'] }, where: {imgame: gameTitle}}).then(function(users) {
+    if (users) {
+      callback(users);
+    } else { // handle case that there are no matching users
+      callback(null);
+    }
+  });
+}
+
+//Getting user's collection by nickname
+exports.getPublicUserCollection = function(nickname, callback) {
+  db.sequelize.query(`SELECT Users.nickname,Games.* FROM Users INNER JOIN GameLibraries ON UserId=Users.id INNER JOIN Games ON GameId=Games.id WHERE Users.nickname="${nickname}";`).spread(function(games) {
+    games.forEach(function(game) {
+      game.genres = JSON.parse(game.genres);
+      game.platforms = JSON.parse(game.platforms);
+      game.franchises = JSON.parse(game.franchises);
+      game.publishers = JSON.parse(game.publishers);
+      game.developers = JSON.parse(game.developers);
+      game.similarGames = JSON.parse(game.similarGames);
+      game.videos = JSON.parse(game.videos);
+    });
+    callback(games);
   });
 };

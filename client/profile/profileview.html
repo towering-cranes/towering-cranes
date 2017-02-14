@@ -1,11 +1,11 @@
 
-<!-- Game Collection -->
+<!-- Game Collection for other users -->
 <div class="row" id="gameCollection">
 <div ng-init="searchModel = false" class='{{searchModel ? "col s9" : "col s12"}}'>
-  <div ng-controller="GameCollectionController">
+  <div ng-controller="OtherCollectionController">
    <nav class="nav-extended blue-grey darken-3">
     <div class="nav-content">
-      <h3 class="collectionTitle flow-text">Game Collection</h3>
+      <h3 class="collectionTitle flow-text">{{username}}'s Game Collection</h3>
     </div>
     <!--Nav bar-->
     <div class="nav-wrapper">
@@ -69,21 +69,14 @@
   </nav>
     <!-- Games view -->
     <div class="row">
-      <span class="white-text" ng-if="data.games.length===0 && isLoggedIn"> No games currently in collection. Add games by pressing the plus button on the right.</span>
-      <span class="white-text" ng-if="!isLoggedIn">Please log in to start collecting!</span>
+      <span class="white-text" ng-if="data.games.length===0 && isLoggedIn"> No games currently in this user's collection.</span>
       <div class="game" ng-repeat="game in data.games | collectionFilter:current | orderBy: (sortOrder || 'title')">
         <!-- grid layout -->
         <div ng-if="layout === 'grid'">
           <div class="col s2">
-              <a data-target="game0" modal ng-click="selectGame(game)">
-                <img class="gameImage responsive-img z-depth-4" ng-src="{{ game.image }}">
-                <!-- TODO: Find game id or track somehow for imgame page -->
-                <a href="#/imgame/{{ game.title }}">
-                  <div class="im-game-grid-button teal darken-1">
-                    I'm Game
-                  </div>
-                </a>
-              </a>
+            <a data-target="game0" modal ng-click="selectGame(game)">
+            <img class="gameImage responsive-img z-depth-4" ng-src="{{ game.image }}">
+            </a>
           </div>
         </div>
       <!-- list layout -->
@@ -95,14 +88,8 @@
                 </div>
                 <div class="card-stacked">
                   <div class="card-content">
-                    <h5 class="white-text">{{game.title}}</h5>
-                    <blockquote>
-                      <p class="white-text">{{ game.summary }}</p>
-                    </blockquote>
-                    <br>
-                    <a href="#/imgame/{{ game.title }}">
-                      <span class="im-game-list-button teal darken-1">I'm Game</span>
-                    </a>
+                    <h5>{{game.title}}</h5>
+                    <p class="black-text">{{ game.summary }}</p>
                   </div>
                 </div>
               </div>
@@ -113,53 +100,8 @@
   </div>
 </div>
 
-
-<!--Search Area -->
-<div class="col s3 search-area" ng-if="searchModel===true">
-  <div ng-controller="SearchController">
-
-    <h4 class="flow-text">Search Games</h4><br>
-      <form name="searchForm" autocomplete="off" ng-submit="searchForGames()">
-        <div class="row">
-          <div class="input-field">
-          <input id="search-input" type="text" ng-model="search" auto-focus placeholder="Enter a game here" required></input>
-        </div>
-      </form>
-      <div class="progress" ng-if="loading===true">
-        <div class="indeterminate"></div>
-      </div>
-    </div>
-    <div class='search-results-container'>
-      <div ng-repeat="game in searchResults">
-        <div class="card horizontal">
-          <div class="card-image">
-            <img class="responsive-img" ng-src="{{ game.image.small_url }}">
-          </div>
-          <div class="card-stacked black-text">
-            <div class="card-content searchCard">
-              <p>{{ game.deck }}</p>
-            </div>
-            <div class="card-action">
-              <a href="" data-target="game0" modal ng-click="selectGame(game)">More Details</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</div>
-
-<!--Search button-->
-<div id="search-button">
-  <a class="btn-floating btn-large waves-effect waves-light teal right" ng-model='searchModel' ng-click='searchModel=!searchModel'>
-  <i class="material-icons" ng-if="searchModel===false">add</i>
-  <i class="material-icons" ng-if="searchModel===true">remove</i>
-  </a>
-</div>
-
 <!--Game Modal Window Area -->
-<!-- Modal window (Not currently mobile friendly)-->
+<!-- Modal window -->
 <div class='modal' id="game0" ng-controller="ModalController">
   <div class="modal-content">
     <div class="row">
@@ -171,21 +113,6 @@
         <h3>{{ data.name }}</h3>
         <h4>{{ data.releaseYear }}</h4>
         <h5 ng-repeat="publisher in data.publishers">{{ publisher.name }}</h5>
-      </div>
-      <div class="col s1">
-        <!-- Close button -->
-        <a ng-click="close" class="modal-action modal-close btn-flat right btn-floating btn-large black">
-          <i class="material-icons">close</i>
-        </a>
-      </div>
-      <div class="col s9 add-remove">
-        <hr>
-        <a ng-click="!inCollection ? addGameToCollection(data.giantBombId) : removeGameFromCollection(data.giantBombId)" class="left btn-floating btn-large waves-effect waves-light teal add-remove-btn">
-          <i ng-show="!inCollection" class="material-icons">add</i>
-          <i ng-show="inCollection" class="material-icons">remove</i>
-        </a>
-        <span ng-show="!inCollection"><h5>Add to Collection</h5></span>
-        <span ng-show="inCollection"><h5>Remove from Collection</h5></span>
       </div>
 
       <!-- Game details -->
@@ -239,5 +166,3 @@
     </div>
   </div>
 </div>
-
-<!-- End of modal window -->

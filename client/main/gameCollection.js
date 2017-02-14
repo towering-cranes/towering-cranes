@@ -1,7 +1,7 @@
 // controller for game collection
 var app = angular.module('gameMon.gameCollection', ['ui.materialize', 'gameMon.selectedGame']);
 app.controller('GameCollectionController', function($scope, UserCollection, SelectedGame, $rootScope) {
-  $scope.data = {};
+  $scope.data = {}; //stores games
   $scope.username = localStorage.profile;
   $rootScope.username = localStorage.profile;
   //Store games in corresponding objects
@@ -22,7 +22,7 @@ app.controller('GameCollectionController', function($scope, UserCollection, Sele
 
   var getCollection = function() {
     UserCollection.getUserCollection($scope.username, function(res) {
-      //Gets user collection, stores platforms and games in $scope.platforms
+      //Gets user collection, stores platforms and games in $scope.platforms;
       $scope.data.games = res.data;
       for (var i = 0; i < $scope.data.games.length; i++) {
         var game = $scope.data.games[i];
@@ -51,13 +51,10 @@ app.controller('GameCollectionController', function($scope, UserCollection, Sele
           }
         }
       }
-      // console.log($scope.data.games);
     });
   };
 
-  //getCollection();
-  UserCollection.addUser({username: $scope.username, password: 'password'}, function(response){
-    // console.log('User successfully added', $scope.username, typeof $scope.username);
+  UserCollection.addUser({username: $scope.username, password: 'password', nickname: localStorage.name, email: localStorage.email}, function(response){
     getCollection();
   });
 
@@ -67,16 +64,20 @@ app.controller('GameCollectionController', function($scope, UserCollection, Sele
 
 });
 
+app.directive('autoFocus', function($timeout) {
+    return {
+        restrict: 'AC',
+        link: function(_scope, _element) {
+            $timeout(function(){
+                _element[0].focus();
+            }, 0);
+        }
+    };
+});
+
 app.factory('UserCollection', ['$http', function($http) {
   var db = {};
 
-   //db.addUser = //make a post request to /users
-    //call add user with whatever local storage user is
-    //call it with password is password
-    //specify a callback
-
-    //db.adduser takes a user object with username password
-      //make an http post request to /users
   db.addUser = function(user, callback){
     $http.post('/users', user).then(function(response){
       callback(response);
