@@ -1,6 +1,6 @@
 # I'm Game #
 
-## Never Play Alone ##
+### You'll Never Have to Play Alone Again ###
 
 ## Summary ##
 
