@@ -1,4 +1,3 @@
-//var env = require('dotenv').load();
 var express = require('express');
 var Sequelize = require('sequelize');
 var bodyParser = require('body-parser');
@@ -16,7 +15,6 @@ app.use(bodyParser.json({limit: '5mb'}));
 
 ////////////////////Socket.io
 
-//var gameroom = '';
 var connections = [];
 var io = require('socket.io')(server);
 io.on('connection', function(socket) {
@@ -48,12 +46,10 @@ io.on('connection', function(socket) {
 
 });
 
-
 //////////////////////////////
 
 // Add a user to db
 app.post('/users', function(req, res) {
-  //console.log(req.body);
   var requestObj = req.body;
   var newUser = {
     username: requestObj.username,
@@ -99,7 +95,6 @@ app.get('/api/users/:gameTitle', function (req, res) {
 app.post('/api/users/:username', function (req, res) {
   var gameTitle = req.body.gameTitle;
   var user = req.params.username;
-  //console.log('inside update user status', gameTitle, user);
 
   dbHelpers.updateImGameUser(user, gameTitle, function(created) {
     if (created) {
@@ -120,7 +115,7 @@ app.get('/users/games/:username', function(req, res) {
 
 app.get('/api/users/games/public/:nickname', function(req, res) {
   var user = req.params.nickname;
-  //console.log(user);
+
   dbHelpers.getPublicUserCollection(user, function(games) {
     res.send(games);
   })
@@ -139,19 +134,6 @@ app.delete('/games', function(req, res) {
     }
   });
 });
-
-// // Filter by game's genre
-// app.get('/games/genre', function(req, res) {
-//   var genre = req.body.genre;
-//   var user = req.body.username;
-//   // Filter user's game by genre
-// });
-
-// app.get('/games/platform', function(req, res) {
-//   var platform = req.body.platform;
-//   var user = req.body.username;
-//   //Filter user games by platform
-// });
 
 app.get('/games/search/keyword/:keyword', function(req, res) {
   var keyword = req.params.keyword;
@@ -176,4 +158,3 @@ app.get('/games/search/id/:id', function(req, res) {
     }
   });
 });
-

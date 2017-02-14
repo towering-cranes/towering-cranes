@@ -4,7 +4,6 @@ var request = require('request');
 
 // var giantBombApiKey = '';
 
-
 // THIS IS FOR THE LIVE SERVER ON HEROKU
 
 var giantBombApiKey = process.env.GIANTBOMB_API_KEY;
