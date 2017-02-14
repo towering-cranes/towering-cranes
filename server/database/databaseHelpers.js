@@ -51,10 +51,6 @@ exports.getGamesFromCollection = function(user, callback) {
 };
 
 exports.removeGameFromCollection = function(user, game, callback) {
-  // Find user id
-  //
-  // Find game id
-  //
   // Delete user/game's row in GameLibraries
   db.User.findOne({attributes: { exclude: ['username'] }, where: {username: user}}).then(function(user) {
     if (user) {
