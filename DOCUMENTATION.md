@@ -23,16 +23,13 @@ Hack Reactor Legacy Project - Modern Grasshoppers
 5.  Client-Side
 							
 - 5.1 Files
-- 5 5.2 UserAuthentication
+- 5.2 User Authentication
 						 							
 6. Deployment
 						 							
 7. Socket.io
 
 
-			
-				
-					
 ## 1. Introduction
 					
 Welcome to “I’m Game!” 
@@ -47,59 +44,57 @@ With thousands of games available through the GiantBomb API, you can keep track 
 ## 2. File Structure
 					
 towering-cranes
-   client					
-     assets					
-        favicon.ico
-        imgame-collection.png
-        imgame-details.png
-        imgame-search.png
-        social-hub-view.jpg
-        Social-view.jpg
-        user-card.jpg
-        Octocat.png					
-     home
-        home.html	
-    imgame
-       imgame.html
-       imgame.js				
-     main
-        gameCollection.js
-        main.html
-        modal.js
-        search.js
-        selectedGame.js
-       toggle.js
-    profile
-       profileview.html
-       profile.js					
-     styles
-        styles.css					
-     app.js					
-     index.html
-   documentation				
-     documentation.pdf
-      documentation.tex
-      documentation.toc				
-   server							
-     database
-        databaseHelpers.js			 				
-        db.js
-     giantBomb					
-        giantBombHelpers.js
-     server.js
-    .gitignore
-    .editorconfig
-    .gitattributes
-    .gitignore
-    .jshintrc
-    .travis.yml
-    CONTRIBUTING.md
-    PRESS-RELEASE.md
-    STYLE-GUIDE.md					
-    package.json
-    README.md
-
-
+- client					
+ - assets					
+      - favicon.ico
+      - imgame-collection.png
+      - imgame-details.png
+      - imgame-search.png
+      - social-hub-view.jpg
+      - Social-view.jpg
+      - user-card.jpg
+      - Octocat.png					
+     - home
+       - home.html	
+    - imgame
+       - imgame.html
+       - imgame.js				
+    - main
+       - gameCollection.js
+       - main.html
+       - modal.js
+       - search.js
+       - selectedGame.js
+       - toggle.js
+   - profile
+      - profileview.html
+      - profile.js					
+    - styles
+       - styles.css					
+    - app.js					
+    - index.html
+  - documentation				
+    - documentation.pdf
+    - documentation.tex
+    -  documentation.toc				
+  - server							
+    - database
+       - databaseHelpers.js			 				
+       - db.js
+    - giantBomb					
+       - giantBombHelpers.js
+    - server.js
+    - gitignore
+    - editorconfig
+    - gitattributes
+    - gitignore
+    - jshintrc
+    - travis.yml
+    - CONTRIBUTING.m
+    - PRESS-RELEASE.md
+    - STYLE-GUIDE.md					
+    - package.json
+    - README.md
 					
 ## 3. Database Schema
 			
@@ -111,8 +106,8 @@ Server-side files hold the routes and the helper functions needed for the routin
 					
 Database Routes
 					
-• ’/users’
-- POST - receives a username and password from the client and adds each to the database for a specific user • ’/games’	–  POST - receives a user and a game from the client and adds the game to that user’s collection in the database
+- ’/users’ POST - receives a username and password from the client and adds each to the database for a specific user 
+- ’/games’	POST - receives a user and a game from the client and adds the game to that user’s collection in the database
 - DELETE - receives a game title and a user from the request body and removes the game from the users collection
 - GET - receives a username from the client as a parameter in the url and sends all of that users games back to the client
 							
@@ -153,15 +148,15 @@ Front-end uses AngularJS with Materialize/Angular-materialize. Materialize/Angul
 					
 Resources:
 					
-• AngularJS
-• Angular-materialize • Material Icons
-• Materialize CSS
+- AngularJS
+- Angular-materialize • Material Icons
+- Materialize CSS
 
 					
 ## 5.1 Files
 					
-The roles of the different files are as follows: • /client/styles/styles.css
-					
+The roles of the different files are as follows:
+• /client/styles/styles.css				
 - Custom stylesheet for overrides and other styles not included in Materialize • /client/assets
 - Images and other files to be used across client pages • /client/index.html				
 - Loads JS libraries
@@ -185,36 +180,34 @@ The roles of the different files are as follows: • /client/styles/styles.css
 							
 • /client/main/modal.js
 - Controller to load data into the scope for modal information
-							
-∗ similar games
+						
 • /client/main/gameCollection.js				 							
-- Holds a factory that allows
-			
-∗  getUserCollection that loads a game collection for the signed-in user
-			
-∗  addGameToCollection adds a selected game to the current users collection
-			
-∗  removeGameFromCollection removes the selected game from the current users collection
-				 							
+- Holds a factory with following functions:
+  - getUserCollection that loads a game collection for the signed-in user
+  - addGameToCollection adds a selected game to the current user’s collection
+  - removeGameFromCollection removes the selected game from the current user’s collection	
 - Holds a custom filter that takes in setFilter(filterOpt) as an input where filterOpt is an array
-			
-∗  custom filter checks for a match in the respective locations of all the objects and returns all matches
-				
-∗  first element of filterOpt is the search term to find
-			
-∗  second element is what type of filter term it is: text, platform, or genre
-			
-∗  returns all objects that will be displayed after filtering
-				
-∗  items holds all possible objects
-									
-• /client/main/search.js
-									
-- Holds a factory that allows ∗ searchByTerm
-									
-∗ searchById
-								
-							 						
+  - checks for a match in the respective locations of all the objects and returns all matches
+  - first element of filterOpt is the search term to find
+  - second element is what type of filter term it is: text, platform, or genre
+  - returns all objects that will be displayed after filtering
+  - items holds all possible objects
+
+- /client/main/search.js
+  - Holds a factory with searchByTerm and searchById functions
+- /client/imgame/imgame.js
+  - Controller for I’m Game view (imgame.html)
+  - Grabs the game name for a specific game from the “gametitle” route parameter
+  - Updates the user’s “I’m game” status to a specific game via a post request
+  - Upon a successful post request, sends a get request to get all users who are currently “I’m game” for the same game
+  - Continuously updates the users list through a setInterval call
+- client/imgame/imgame.html
+  - In addition to being the view for imgame.js, holds a script for socket.io chat (see Section 7 below)
+- client/profile/profile.js
+  - Controller for viewing another user’s profile
+  - Similar to gameCollection.js, except grabs user nickname from route params and sends a post request based on that information. Also,  there is no ability to remove or add games or change “I’m game” status
+
+										
 					 					
 ## 5.2 User Authentication
 					
@@ -223,20 +216,22 @@ We implemented a client-side authentication using Auth0. The toggle.js files hol
 authProvider.init({							
 domain: <our domain key>, clientID: <our client ID>	
 								
-					
-After this we create a controller, LoginController, which runs when a user clicks signup and when a user logs out. The important takeaway from this controller is its use of local storage. When the user logs in, their profile information and Auth0 access token is added to the browsers local storage. We set and remove the profile and token by calling localStorage.setItem and localStorage.removeItem. We are able to keep the user logged in or logged out by looking for a profile on their local browser and toggling the signup/sign out buttons accordingly with ng-if.
+After this we create a controller, LoginController, which runs when a user clicks signup and when a user logs out. The important takeaway from this controller is its use of local storage. When the user logs in, their profile information and Auth0 access token is added to the browser's local storage. We set and remove the profile and token by calling localStorage.setItem and localStorage.removeItem. We are able to keep the user logged in or logged out by looking for a profile on their local browser and toggling the signup/sign out buttons accordingly with ng-if.
+
+We implemented Google auth and Facebook SSO as additional social providers for Auth0. For client-side authentication, Auth0 uses client credentials to get an access token and then follows the same procedure of being added to the browser's local storage. 
 					
 Resources:
 					
-• Auth0 Authentication Service • Auth0 with Angular Module
+- Auth0 Authentication Service
+- Auth0 with Angular Module
 		
 ## 6. Deployment
 
 Modern Grasshoppers used Heroku to deploy the app. 
 
-Recommend using a JAWSDB addon if deploying to Heroku. App uses a JAWSDB environment variable and didn’t work well when using a different MySQL addon service. 
+We recommend using a JAWSDB addon if deploying to Heroku. App uses a JAWSDB environment variable and didn’t work well when using a different MySQL addon service. 
 
-Have a single member on your team rebase and push to your Heroku master. 	
+For advice, we suggest that a single member on your team rebase and push to your Heroku master. 	
 					
 ## 7. Socket.io
 
